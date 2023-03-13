@@ -15,6 +15,7 @@ jobs:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@master
         env:
+          ## PAT generated on Github, added to repo as secret
           GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
           REPO_OWNER: redjax
           WITH_V: true
