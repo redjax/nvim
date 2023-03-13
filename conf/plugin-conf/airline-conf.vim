@@ -1,7 +1,7 @@
 ﻿" Set airline theme {{{
     " https://github.com/vim-airline/vim-airline-themes
 
-    " Uncommend a line to use that theme.
+    " Uncomment a line to use that theme.
     "    Make sure to uncomment ONLY 1 line
     " let g:airline_theme='dark'
     " let g:airline_theme='hybridline'
