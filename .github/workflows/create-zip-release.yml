@@ -5,12 +5,13 @@ name: Deploy release
 
 on:
   pull_request:
-    
-    branches:
+    # branches:
       ## Workflow will only run when PR is made to main branch
       #  You must put single quotes around any branch that is not the default
+      #  i.e. if 'dev' is not the default branch, but you want to run this workflow
+      #  when a PR is made on the dev branch, put quotes around it, like 'dev'
       # - main
-      - 'release'
+      # ['release']
 
     types:
       ## Pull requests can be labeled or unlabeled
@@ -23,7 +24,7 @@ jobs:
 
     runs-on: ubuntu-latest
     ## Steps will only run if pull request has label: release and/or the commit message contains "#release"
-    # if: contains(${{ github.event.head_commit.message }}, '#release') || ${{ github.event.label.name == 'release' }}
+    if: contains(${{ github.event.head_commit.message }}, '#release') || ${{ github.event.label.name == 'release' }}
 
     steps:
       
