@@ -12,7 +12,7 @@ on:
       #  i.e. if 'dev' is not the default branch, but you want to run this workflow
       #  when a PR is made on the dev branch, put quotes around it, like 'dev'
       # - main
-      - 'release'
+      ['release']
 
     types:
       ## Pull requests can be labeled or unlabeled
