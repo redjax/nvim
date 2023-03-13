@@ -106,6 +106,22 @@ My setup uses multiple plugins. I use [Vim Plug](https://github.com/junegunn/vim
   - URL: https://github.com/yuttie/comfortable-motion.vim
   - Plug Install: `Plug 'yuttie/comfortable-motion.vim'`
 
+- Awesome Colorschemes
+  - URL: https://github.com/rafi/awesome-vim-colorschemes
+  - Plug Install: Plug 'rafi/awesome-vim-colorschemes'
+
+- Colorschemes
+  - URL: https://github.com/flazz/vim-colorschemes'
+  - Plug Install: Plug 'flazz/vim-colorschemes' 
+
+- Vim-Themes
+  - URL: https://github.com/mswift42/vim-themes
+  - Plug Install: Plug 'mswift42/vim-themes'
+
+- Highlighted yank
+  - URL: https://github.com/machakann/vim-highlightedyank
+  - Plug Install: Plug 'machakann/vim-highlightedyank'
+
 ### Will/Might Try
 
 - Ale
