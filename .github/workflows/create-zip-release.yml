@@ -1,11 +1,14 @@
 name: Deploy release
 
 on:
-  pull_request:
-    branches:
-      - main
-  release:
-    types: [published, created]
+  # pull_request:
+  #   branches:
+  #     - main
+  # release:
+  #   types: [published, created]
+  push:
+    tags:
+      - "*"
 
 jobs:
   build:
@@ -13,28 +16,39 @@ jobs:
     steps:
       
       - name: Checkout repo
-        # if: github.ref == 'refs/heads/releases'
         uses: actions/checkout@v2
 
-      - name: Create Release Folder
-        run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
+      # - name: Create Release Folder
+      #   run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
       
-      - name: Switch to Release Folder
-        run: |
-          cd release
-          ls -la
+      # - name: Switch to Release Folder
+      #   run: |
+      #     cd release
+      #     ls -la
 
-      - name: Checkout repo
-        # if: github.ref == 'refs/heads/releases'
-        uses: actions/checkout@v2
+      # - name: Checkout repo
+      #   # if: github.ref == 'refs/heads/releases'
+      #   uses: actions/checkout@v2
 
-      - name: Bump version and push tag
-        # if: github.ref == 'refs/heads/releases' || github.event.pull_request.base.ref == 'main'
-        uses: anothrNick/github-tag-action@master
-        env:
-          ## PAT generated on Github, added to repo as secret
-          GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
-          REPO_OWNER: redjax
-          WITH_V: true
-          RELEASE_BRANCHES: release
-          DEFAULT_BRAND: release
+      - name: Create archive release
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: "release.zip"
+          exclusions: "*.git .github"
+
+      # - name: Bump version and push tag
+      #   # if: github.ref == 'refs/heads/releases' || github.event.pull_request.base.ref == 'main'
+      #   uses: anothrNick/github-tag-action@master
+      #   env:
+      #     ## PAT generated on Github, added to repo as secret
+      #     GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
+      #     REPO_OWNER: redjax
+      #     WITH_V: true
+      #     RELEASE_BRANCHES: release
+      #     DEFAULT_BRAND: release
+
+      - name: Upload release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release.zip"
+          token: ${{ secrets.NVIM_GITHUB_TOKEN }}
