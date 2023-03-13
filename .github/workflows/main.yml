@@ -28,6 +28,7 @@ jobs:
           REPO_OWNER: redjax
           WITH_V: true
           RELEASE_BRANCHES: release
+          DEFAULT_BRAND: release
 
       # - name: Create zip
       #   run: zip -r release.zip . -x ".git/*" ".github/*" "README.md"
