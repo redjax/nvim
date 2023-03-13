@@ -10,8 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    ## Steps will only run if pull request has label: release
-    if: ${{ github.event.label.name == "release") }}
+    ## Steps will only run if pull request has label: release and release branch is "main"
+    if: ${{ github.event.label.name == "release") }} && ${{ github.ref == 'refs/heads/main' }}
+
 
     steps:
       
