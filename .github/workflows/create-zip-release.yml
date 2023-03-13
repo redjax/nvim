@@ -1,0 +1,32 @@
+name: Deploy release
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Create Release Folder
+        run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
+      
+      - name: Switch to Release Folder
+        run: |
+          cd release
+          ls -la
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@master
+        env:
+          ## PAT generated on Github, added to repo as secret
+          GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
+          REPO_OWNER: redjax
+          WITH_V: true
+          RELEASE_BRANCHES: release
+          DEFAULT_BRAND: release
