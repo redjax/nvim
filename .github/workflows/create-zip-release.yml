@@ -4,13 +4,15 @@ on:
   pull_request:
     branches:
       - main
-    tags:
-      - "*"
+    types:
+      - labeled
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, "#release") }}
+    ## Steps will only run if pull request has label: release
+    if: ${{ github.event.label.name == "release") }}
+
     steps:
       
       - name: Checkout repo
@@ -25,11 +27,9 @@ jobs:
           ls -la
 
       - name: Checkout repo
-        # if: github.ref == 'refs/heads/releases'
         uses: actions/checkout@v2
 
       - name: Bump version and push tag
-        # if: github.ref == 'refs/heads/releases' || github.event.pull_request.base.ref == 'main'
         uses: anothrNick/github-tag-action@master
         env:
           ## PAT generated on Github, added to repo as secret
