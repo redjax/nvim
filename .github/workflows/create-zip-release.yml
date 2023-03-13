@@ -10,7 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    ## Steps will only run if commit message contains text: #release
     if: ${{ contains(github.event.head_commit.message, "#release") }}
+
     steps:
       
       - name: Checkout repo
@@ -25,11 +27,9 @@ jobs:
           ls -la
 
       - name: Checkout repo
-        # if: github.ref == 'refs/heads/releases'
         uses: actions/checkout@v2
 
       - name: Bump version and push tag
-        # if: github.ref == 'refs/heads/releases' || github.event.pull_request.base.ref == 'main'
         uses: anothrNick/github-tag-action@master
         env:
           ## PAT generated on Github, added to repo as secret
