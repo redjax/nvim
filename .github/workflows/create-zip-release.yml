@@ -4,15 +4,16 @@ on:
   pull_request:
     branches:
       - main
-    types:
-      - labeled
+    # types:
+    #   - labeled
 
 jobs:
   build:
     runs-on: ubuntu-latest
     ## Steps will only run if pull request has label: release
-    if: ${{ github.event.label.name == 'release' }}
-
+    # if: ${{ github.event.label.name == 'release' }}
+    ## Steps will only run if commit message has #release in the text
+    if: ${{ contains(github.event.head_commit.message, '#release')}}
 
     steps:
       
