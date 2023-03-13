@@ -1,9 +1,11 @@
 name: Deploy release
 
 on:
-  # pull_request:
-  #   branches:
-  #     - main
+  pull_request:
+    branches:
+      - main
+    tags:
+      - "release"
   # release:
   #   types: [published, created]
   push:
