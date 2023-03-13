@@ -28,7 +28,7 @@ jobs:
 
       ## Create a folder "release/", omit files in --exclude=""
       - name: Create release directory
-        run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
+        run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' ./nvim_config ./release
       
       ## CD into the release/ dir
       - name: Switch to release directory
