@@ -1,19 +1,23 @@
-" call plug#begin()
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-" Plug 'junegunn/vim-easy-align'
-
-" " Plugin outside ~/.vim/plugged with post-update hook
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-" call plug#end()
+"
+" My Nvim config file.
+"   https://github.com/redjax/nvim
+"
 
 "
-" Copy and paste for new sources:
-" if filereadable(expand('~/.config/nvim/conf/<CONF>.vim')) 
-"   source ~/.config/nvim/conf/<CONF>.vim
-" end
-"
+" Copy & paste for new sources
+"   Handles Windows & Unix environments
+" if has("win32") || has("win64")
+"     " Windows Environment
+" 
+"     if filereadable(expand('~/AppData/Local/nvim/'))
+"         source ~/AppData/Local/nvim/conf/<CONF>.vim
+"     end
+" 
+" elseif has('unix')
+"     " Linux/Mac Environment
+" 
+"     source ~/.config/nvim/conf/<CONF>.vim
+" endif
 
 " Environment
 if filereadable(expand('~/AppData/Local/nvim/conf/environment.vim'))
@@ -21,22 +25,26 @@ if filereadable(expand('~/AppData/Local/nvim/conf/environment.vim'))
 end
 
 " Mappings
-if filereadable(expand("~/AppData/Local/nvim/conf/mappings.vim"))
-    source ~/AppData/Local/nvim/conf/mappings.vim
+if filereadable(expand('~/AppData/Local/nvim/conf/key-mappings.vim'))
+    source ~/AppData/Local/nvim/conf/key-mappings.vim
 end
 
 " autocmd Rules
-if filereadable(expand("~/AppData/Local/nvim/conf/autocmd-rules.vim"))
+if filereadable(expand('~/AppData/Local/nvim/conf/autocmd-rules.vim'))
     source ~/AppData/Local/nvim/conf/autocmd-rules.vim
 end
 
 " Vim Plug plugin manager
-if filereadable(expand("~/AppData/Local/nvim/conf/vim-plug.vim"))
-    source ~/AppData/Local/nvim/conf/vim-plug.vim
+" if filereadable(expand('~/AppData/Local/nvim/conf/vim-plug.vim'))
+"     source ~/AppData/Local/nvim/conf/vim-plug.vim
+" end
+
+" Vim Plug plugin manager
+if filereadable(expand('~/AppData/Local/nvim/conf/vimplug/vimplug-core.vim'))
+    source ~/AppData/Local/nvim/conf/vimplug/vimplug-core.vim
 end
 
 " Loop over plugin configurations
-for f in split(glob("~/AppData/Local/nvim/conf/plugin-conf/*.vim"), "\n")
-    exe "source" f
+for f in split(glob('~/AppData/Local/nvim/conf/plugin-conf/*.vim'), '\n')
+    exe 'source' f
 endfor
-
