@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+  release:
+    types: [published, created]
 
 jobs:
   build:
@@ -22,13 +24,17 @@ jobs:
           cd release
           ls -la
 
-      # - name: Bump version and push tag
-      #   uses: anothrNick/github-tag-action@master
-      #   if: github.event.pull_request.base.ref == 'main'
-      #   env:
-      #     ## PAT generated on Github, added to repo as secret
-      #     GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
-      #     REPO_OWNER: redjax
-      #     WITH_V: true
-      #     RELEASE_BRANCHES: release
-      #     DEFAULT_BRAND: release
+      - name: Checkout repo
+        if: github.ref == 'refs/heads/releases'
+        uses: actions/checkout@v2
+
+      - name: Bump version and push tag
+        if: github.ref == 'refs/heads/releases' || github.event.pull_request.base.ref == 'main'
+        uses: anothrNick/github-tag-action@master
+        env:
+          ## PAT generated on Github, added to repo as secret
+          GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
+          REPO_OWNER: redjax
+          WITH_V: true
+          RELEASE_BRANCHES: release
+          DEFAULT_BRAND: release
