@@ -1,0 +1,22 @@
+name: Deploy release
+
+on:
+  release:
+    types: [published, created]
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_ACTION }}
+          REPO_OWNER: redjax
+          WITH_V: true
+          RELEASE_BRANCHES: release
+          DEFAULT_BRAND: release
