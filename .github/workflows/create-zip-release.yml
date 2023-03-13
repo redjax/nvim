@@ -24,14 +24,9 @@ jobs:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_ACTION }}
+          ## PAT generated on Github, added to repo as secret
+          GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
           REPO_OWNER: redjax
           WITH_V: true
           RELEASE_BRANCHES: release
           DEFAULT_BRAND: release
-
-      # - name: Create zip
-      #   run: zip -r release.zip . -x ".git/*" ".github/*" "README.md"
-
-      # - name: Release to Github
-      #   run: echo "Release"
