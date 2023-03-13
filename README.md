@@ -108,5 +108,36 @@ My setup uses multiple plugins. I use [Vim Plug](https://github.com/junegunn/vim
 
 ### Notes
 
+- In `.vim` files, a `"` is for comments
+- Check environment (Windows, Mac/Linux) before a vim configuration line
+
+```
+if has("win32") || has("win64")
+    " Windows environment
+
+elseif has("unix")
+    " Mac/Linux environment
+
+end
+```
+
+- Using variables
+  - Get variable man pages with `:help internal-variables`
+  - Set a global variable with `g:<variableName> = <value>`
+    - Global variables are accessible in all `.vim` files
+  - Set a script variable with `s:<variableName> = <value>`
+    - Script variables are accessible only in the file they are set in
+  - Set a function argument with `a:<variableName> = <value>`
+    - Function variables are accessible only within the function
+  - Access a `vim-variable` with `v:<variableName>`
+    - Vim variables are global, andd are pre-defined by Vim/Nvim
+  - Use a variable in a string
+    - i.e. a variable `s:vimfiles` is declared with value `~/AppData/Local/nvim-data`
+    - In the below example, a filepath is built to Vim's `nvim-data` (which is different across platforms), and creates a path to the binary for the current OS.
+
+```
+let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_engine_' . s:os . '_amd64'
+```
+
 ### Links
 
