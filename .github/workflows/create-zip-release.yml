@@ -36,16 +36,16 @@ jobs:
           filename: "release.zip"
           exclusions: "*.git .github"
 
-      # - name: Bump version and push tag
-      #   # if: github.ref == 'refs/heads/releases' || github.event.pull_request.base.ref == 'main'
-      #   uses: anothrNick/github-tag-action@master
-      #   env:
-      #     ## PAT generated on Github, added to repo as secret
-      #     GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
-      #     REPO_OWNER: redjax
-      #     WITH_V: true
-      #     RELEASE_BRANCHES: release
-      #     DEFAULT_BRAND: release
+      - name: Bump version and push tag
+        # if: github.ref == 'refs/heads/releases' || github.event.pull_request.base.ref == 'main'
+        uses: anothrNick/github-tag-action@master
+        env:
+          ## PAT generated on Github, added to repo as secret
+          GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
+          REPO_OWNER: redjax
+          WITH_V: true
+          RELEASE_BRANCHES: release
+          DEFAULT_BRAND: release
 
       - name: Upload release
         uses: ncipollo/release-action@v1
