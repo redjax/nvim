@@ -175,5 +175,13 @@ end
 let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_engine_' . s:os . '_amd64'
 ```
 
+- Open nvim & immediately run command
+  - `nvim +SomeCommand`
+  - i.e. to run `:PlugInstall` automatically:
+    - `nvim +PlugInstall`
+  - You can also open nvim, run a command, and exit with `+qa`
+    - i.e. Run `:PlugInstall` and `:PlugClean`, then exit
+    - `nvim +PlugInstall +PlugClean +qa`
+
 ### Links
 
