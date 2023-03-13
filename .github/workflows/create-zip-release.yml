@@ -29,8 +29,8 @@ jobs:
       ## Checkout repo in runner
       - name: Checkout repo
         uses: actions/checkout@v2
-        # with:
-        #   ref: release
+        with:
+          ref: release
 
       ## Create a folder "release/", omit files in --exclude=""
       - name: Create release directory
