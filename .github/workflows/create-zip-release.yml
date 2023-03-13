@@ -1,7 +1,6 @@
 ###################################################
 # Github Actions workflow to create a release.zip #
 ###################################################
-
 name: Deploy release
 
 on:
