@@ -5,16 +5,12 @@ on:
     branches:
       - main
     tags:
-      - "release"
-  # release:
-  #   types: [published, created]
-  push:
-    tags:
       - "*"
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, "#release") }}
     steps:
       
       - name: Checkout repo
@@ -42,9 +38,3 @@ jobs:
           WITH_V: true
           RELEASE_BRANCHES: release
           DEFAULT_BRAND: release
-
-      # - name: Upload release
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     artifacts: "release.zip"
-      #     token: ${{ secrets.NVIM_GITHUB_TOKEN }}
