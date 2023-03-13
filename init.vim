@@ -2,10 +2,17 @@
 " My Nvim config file.
 "   https://github.com/redjax/nvim
 "
+" The init.vim file sources all configurations & plugin installations
+"   from files in the conf/ directory. I do my best to make commands cross-platform
+"   (sometimes disabling features, if they aren't available on a certain platform).
+"
+" NOTE FOR MAC USERS: None of this configuration is tested on Mac.
+"
 
 "
-" Copy & paste for new sources
-"   Handles Windows & Unix environments
+" Copy & paste lines below for new files to source.
+"   The lines check that a file is readable, and check a different path per-environment.
+
 " if has("win32") || has("win64")
 "     " Windows Environment
 " 
@@ -18,6 +25,8 @@
 " 
 "     source ~/.config/nvim/conf/<CONF>.vim
 " endif
+"
+
 
 " Environment
 if filereadable(expand('~/AppData/Local/nvim/conf/environment.vim'))
@@ -33,11 +42,6 @@ end
 if filereadable(expand('~/AppData/Local/nvim/conf/autocmd-rules.vim'))
     source ~/AppData/Local/nvim/conf/autocmd-rules.vim
 end
-
-" Vim Plug plugin manager
-" if filereadable(expand('~/AppData/Local/nvim/conf/vim-plug.vim'))
-"     source ~/AppData/Local/nvim/conf/vim-plug.vim
-" end
 
 " Vim Plug plugin manager
 if filereadable(expand('~/AppData/Local/nvim/conf/vimplug/vimplug-core.vim'))
