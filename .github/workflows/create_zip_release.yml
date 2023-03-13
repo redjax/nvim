@@ -11,7 +11,7 @@ jobs:
       with:
         type: 'tar'
         filename: 'release.tar.gz'
-        directory: .
+        # directory: .
         exclusions: '*.git* /*node_modules/* .editorconfig'
 
     - name: Upload Release
