@@ -1,0 +1,48 @@
+# name: Create .zip release in releases/ branch.
+# on:
+#   pull_request:
+#     branches:
+#     - main
+#   push:
+#     branches:
+#       - "releases/**"
+
+# jobs:
+#   build:
+#     # runs-on: ubuntu-latest
+#     runs-on: [self-hosted]
+#     steps:
+#     - uses: actions/checkout@v1
+    
+#     - name: Create Release Folder
+#       run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
+    
+#     - name: Switch to Release Folder
+#       run: |
+#         cd release
+#         ls -la
+
+#     - name: Bump version and push tag
+#       uses: anothrNick/github-tag-action@master
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.nvim_github_action }}
+#         REPO_OWNER: redjax
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@master
+#     - name: Archive Release
+#       uses: thedoctor0/zip-release@0.7.1
+#       with:
+#         type: 'tar'
+#         filename: 'release.tar.gz'
+#         # directory: .
+#         exclusions: '*.git* /*node_modules/* .editorconfig'
+
+#     - name: Upload Release
+#       uses: ncipollo/release-action@v1.12.0
+#       with:
+#         artifacts: "release.tar.gz"
+#         token: ${{ secrets.nvim_github_action }}
