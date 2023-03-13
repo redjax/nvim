@@ -26,6 +26,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_ACTION }}
           REPO_OWNER: redjax
+          WITH_V: true
+          RELEASE_BRANCHES: release
 
       # - name: Create zip
       #   run: zip -r release.zip . -x ".git/*" ".github/*" "README.md"
