@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+
     - name: Copy build-artifacts
       uses: skx/github-action-publish-binaries@master
       env:
