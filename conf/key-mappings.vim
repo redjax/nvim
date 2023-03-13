@@ -7,4 +7,3 @@ noremap <leader>so :OpenSession<Space>
 noremap <leader>ss :SaveSession<Space>
 noremap <leader>sd :DeleteSession<CR>
 noremap <leader>sc :CloseSession<CR>
-
