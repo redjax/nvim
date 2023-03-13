@@ -4,8 +4,8 @@ on:
   pull_request:
     branches:
       - main
-    tags:
-      - "*"
+    types:
+      - labeled
 
 jobs:
   build:
