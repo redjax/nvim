@@ -1,0 +1,21 @@
+name: Create .tar.gz archive of folder
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Archive Release
+      uses: thedoctor0/zip-release@0.7.1
+      with:
+        type: 'tar'
+        filename: 'release.tar.gz'
+        directory: .
+        exclusions: '*.git* /*node_modules/* .editorconfig'
+
+    - name: Upload Release
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        artifacts: "release.tar.gz"
+        token: ${{ secrets.nvim_github_action }}
