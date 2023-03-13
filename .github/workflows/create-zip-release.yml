@@ -4,8 +4,13 @@ on:
   pull_request:
     branches:
       - main
-  release:
-    types: [published, created]
+    tags:
+      - "release"
+  # release:
+  #   types: [published, created]
+  push:
+    tags:
+      - "*"
 
 jobs:
   build:
@@ -13,7 +18,6 @@ jobs:
     steps:
       
       - name: Checkout repo
-        # if: github.ref == 'refs/heads/releases'
         uses: actions/checkout@v2
 
       - name: Create Release Folder
@@ -38,3 +42,9 @@ jobs:
           WITH_V: true
           RELEASE_BRANCHES: release
           DEFAULT_BRAND: release
+
+      # - name: Upload release
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     artifacts: "release.zip"
+      #     token: ${{ secrets.NVIM_GITHUB_TOKEN }}
