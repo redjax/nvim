@@ -1,3 +1,6 @@
+###################################################
+# Github Actions workflow to create a release.zip #
+###################################################
 name: Deploy release
 
 on:
@@ -19,13 +22,15 @@ jobs:
 
     runs-on: ubuntu-latest
     ## Steps will only run if pull request has label: release and/or the commit message contains "#release"
-    if: contains(${{ github.event.head_commit.message }}, '#release') || ${{ github.event.label.name == 'release' }}
+    # if: contains(${{ github.event.head_commit.message }}, '#release') || ${{ github.event.label.name == 'release' }}
 
     steps:
       
       ## Checkout repo in runner
-      - name: Checkout epo
+      - name: Checkout repo
         uses: actions/checkout@v2
+        # with:
+        #   ref: release
 
       ## Create a folder "release/", omit files in --exclude=""
       - name: Create release directory
@@ -51,4 +56,4 @@ jobs:
           #  generate versions postfixed with the commit hash and do not generate
           #  any tag. Examples: master or .* or release.*,hotfix.*,master
           RELEASE_BRANCHES: release, release.*, topic/zip-release
-          DEFAULT_BRAND: release
+          DEFAULT_BRANCH: release
