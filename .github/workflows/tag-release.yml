@@ -10,9 +10,11 @@ jobs:
     steps:
       
       - name: Checkout repo
+        if: github.ref == 'refs/heads/releases'
         uses: actions/checkout@v2
 
       - name: Bump version and push tag
+        if: github.ref == 'refs/heads/releases' || github.event.pull_request.base.ref == 'main'
         uses: anothrNick/github-tag-action@master
         env:
           ## PAT generated on Github, added to repo as secret
