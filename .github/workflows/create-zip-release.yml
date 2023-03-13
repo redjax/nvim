@@ -1,32 +1,53 @@
+###################################################
+# Github Actions workflow to create a release.zip #
+###################################################
 name: Deploy release
 
 on:
   pull_request:
-    branches:
-      - main
+    types:
+      ## Pull requests can be labeled or unlabeled
+      - labeled
+      - unlabeled
 
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
+    ## Steps will only run if pull request has label: release
+    if: ${{ github.event.label.name == 'release' }}
+
     steps:
       
+      ## Checkout repo in runner
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          ref: release
 
-      - name: Create Release Folder
-        run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
+      ## Create a folder "release/", omit files in --exclude=""
+      - name: Create release directory
+        run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' ./nvim_config ./release
       
-      - name: Switch to Release Folder
+      ## CD into the release/ dir
+      - name: Switch to release directory
         run: |
           cd release
           ls -la
 
-      - name: Bump version and push tag
+      ## Bump tag version (i.e. v0.1.0 -> v0.2.0), push tag to repository
+      - name: Bump version & push tag
         uses: anothrNick/github-tag-action@master
         env:
           ## PAT generated on Github, added to repo as secret
           GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
           REPO_OWNER: redjax
+          ## Prepend "v" to version, i.e. 0.1.0 -> v0.1.0
           WITH_V: true
-          RELEASE_BRANCHES: release
-          DEFAULT_BRAND: release
+          ## Comma separated list of branches (bash reg exp accepted) that
+          #  will generate the release tags. Other branches and pull-requests
+          #  generate versions postfixed with the commit hash and do not generate
+          #  any tag. Examples: master or .* or release.*,hotfix.*,master
+          RELEASE_BRANCHES: release, release.*, topic/zip-release
+          DEFAULT_BRANCH: release
