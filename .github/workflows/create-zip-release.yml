@@ -5,14 +5,6 @@ name: Deploy release
 
 on:
   pull_request:
-    # branches:
-      ## Workflow will only run when PR is made to main branch
-      #  You must put single quotes around any branch that is not the default
-      #  i.e. if 'dev' is not the default branch, but you want to run this workflow
-      #  when a PR is made on the dev branch, put quotes around it, like 'dev'
-      # - main
-      # ['release']
-
     types:
       ## Pull requests can be labeled or unlabeled
       - labeled
