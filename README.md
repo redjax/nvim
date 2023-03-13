@@ -1,5 +1,19 @@
 ﻿# My Neovim configuration file
 
+## Table of Contents
+
+- [My Neovim configuration file](#my-neovim-configuration-file)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Setup/Usage](#setupusage)
+  - [Directory Structure](#directory-structure)
+  - [Vim/Nvim Plugins](#vimnvim-plugins)
+    - [In Use](#in-use)
+    - [Will/Might Try](#willmight-try)
+  - [Links \& Notes](#links--notes)
+    - [Notes](#notes)
+    - [Links](#links)
+
 ## Description
 
 I use Neovim across Linux hosts (mostly Debian/Ubuntu, but occasionally Fedora & openSuSE). I am working to make my `nvim` configuration directory cross-platform.
@@ -19,6 +33,16 @@ I use Neovim across Linux hosts (mostly Debian/Ubuntu, but occasionally Fedora &
 	- Run `Plug` install command(s):
 	  - `nvim +PlugInstall +PlugUpdate +qa`
 	- Run with `nvim` to make sure there are no errors.
+
+## Directory Structure
+
+My `init.vim` sources configuration & plugin installations from the `conf/` directory. The root level of `conf/` should only be environment/common files. This is where my `autocmd` rules file, key mappings, environment configuration, & plugin manager files are.
+
+Configurations for plugins are loaded from the `plugin-conf` directory in a `for` loop inside `init.vim`. When adding new config files, you don't need to add lines to `init.vim`. The order sourcing is configured in `init.vim` is for compatibility, and to ensure things load in the correct way.
+
+The `autoload/` directory is created by `vim-plug` upon installation. You don't need to mess with anything in that directory.
+
+The `colors/` directory stores my themes for Vim/Nvim. I'm still working on figuring out how to get these installed correctly through `vim-plug`.
 
 ## Vim/Nvim Plugins
 
@@ -78,13 +102,25 @@ My setup uses multiple plugins. I use [Vim Plug](https://github.com/junegunn/vim
   - URL: https://github.com/raimondi/delimitmate
   - Plug Install: `Plug 'raimondi/delimitmate'`
 
-- Better Whitespace
-  - URL: https://github.com/ntpeters/vim-better-whitespace
-  - Plug Install: `Plug 'ntpeters/vim-better-whitepsace'`
-
 - Comfortable Motion
   - URL: https://github.com/yuttie/comfortable-motion.vim
   - Plug Install: `Plug 'yuttie/comfortable-motion.vim'`
+
+- Awesome Colorschemes
+  - URL: https://github.com/rafi/awesome-vim-colorschemes
+  - Plug Install: Plug 'rafi/awesome-vim-colorschemes'
+
+- Colorschemes
+  - URL: https://github.com/flazz/vim-colorschemes'
+  - Plug Install: Plug 'flazz/vim-colorschemes' 
+
+- Vim-Themes
+  - URL: https://github.com/mswift42/vim-themes
+  - Plug Install: Plug 'mswift42/vim-themes'
+
+- Highlighted yank
+  - URL: https://github.com/machakann/vim-highlightedyank
+  - Plug Install: Plug 'machakann/vim-highlightedyank'
 
 ### Will/Might Try
 
