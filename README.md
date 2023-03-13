@@ -78,10 +78,6 @@ My setup uses multiple plugins. I use [Vim Plug](https://github.com/junegunn/vim
   - URL: https://github.com/raimondi/delimitmate
   - Plug Install: `Plug 'raimondi/delimitmate'`
 
-- Better Whitespace
-  - URL: https://github.com/ntpeters/vim-better-whitespace
-  - Plug Install: `Plug 'ntpeters/vim-better-whitepsace'`
-
 - Comfortable Motion
   - URL: https://github.com/yuttie/comfortable-motion.vim
   - Plug Install: `Plug 'yuttie/comfortable-motion.vim'`
