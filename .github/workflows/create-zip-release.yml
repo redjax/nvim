@@ -1,9 +1,15 @@
 name: Deploy release
 
 on:
+  push:
+    branches:
+      - releases
   pull_request:
     branches:
+      - releases
       - main
+    types:
+      - closed
 
 jobs:
   build:
@@ -11,6 +17,7 @@ jobs:
     steps:
       
       - name: Checkout repo
+        if: github.ref == 'refs/heads/releases'
         uses: actions/checkout@v2
 
       - name: Create Release Folder
@@ -23,6 +30,7 @@ jobs:
 
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@master
+        if: github.event.pull_request.base.ref == 'main'
         env:
           ## PAT generated on Github, added to repo as secret
           GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
