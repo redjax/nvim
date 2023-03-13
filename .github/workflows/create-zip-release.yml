@@ -1,15 +1,11 @@
 name: Deploy release
 
 on:
-  push:
-    branches:
-      - releases
   pull_request:
     branches:
-      - releases
       - main
-    types:
-      - closed
+    # types:
+    #   - closed
 
 jobs:
   build:
@@ -28,13 +24,13 @@ jobs:
           cd release
           ls -la
 
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@master
-        if: github.event.pull_request.base.ref == 'main'
-        env:
-          ## PAT generated on Github, added to repo as secret
-          GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
-          REPO_OWNER: redjax
-          WITH_V: true
-          RELEASE_BRANCHES: release
-          DEFAULT_BRAND: release
+      # - name: Bump version and push tag
+      #   uses: anothrNick/github-tag-action@master
+      #   if: github.event.pull_request.base.ref == 'main'
+      #   env:
+      #     ## PAT generated on Github, added to repo as secret
+      #     GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
+      #     REPO_OWNER: redjax
+      #     WITH_V: true
+      #     RELEASE_BRANCHES: release
+      #     DEFAULT_BRAND: release
