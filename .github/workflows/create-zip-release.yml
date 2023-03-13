@@ -8,8 +8,9 @@ on:
     
     branches:
       ## Workflow will only run when PR is made to main branch
+      #  You must put single quotes around any branch that is not the default
       # - main
-      - release
+      - 'release'
 
     types:
       ## Pull requests can be labeled or unlabeled
