@@ -29,10 +29,3 @@ jobs:
       uses: redjax/nvim@main
       env:
         GITHUB_TOKEN: ${{ secrets.nvim_github_action }}
-
-    - name: Copy build-artifacts
-      uses: skx/github-action-publish-binaries@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.nvim_github_action }}
-      with:
-        args: "./dist/*.tar.gz"
