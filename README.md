@@ -20,6 +20,8 @@ I use Neovim across Linux hosts (mostly Debian/Ubuntu, but occasionally Fedora &
 
 `init.vim` sources configuration files in `conf/`. My `init.vim` was getting large and difficult to maintain, so I broke the various configurations into smaller pieces. Over time, I hope to break these out even more to make configurations pluggable depending on the host platform.
 
+This repository uses a `Github Actions` workflow file (in `.github/workflows/`) to create a `.zip` and `.tar.gz` tagged release when a PR is made with the `release` label. This is so the configuration can be downloaded as an archive when access to Github is unavailable.
+
 ## Setup/Usage
 
 - On `Linux` hosts
