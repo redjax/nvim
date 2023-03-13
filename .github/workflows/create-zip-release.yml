@@ -5,7 +5,8 @@ on:
     
     branches:
       ## Workflow will only run when PR is made to main branch
-      - main
+      # - main
+      - release
 
     types:
       ## Pull requests can be labeled or unlabeled
