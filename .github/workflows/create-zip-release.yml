@@ -51,4 +51,4 @@ jobs:
           #  generate versions postfixed with the commit hash and do not generate
           #  any tag. Examples: master or .* or release.*,hotfix.*,master
           RELEASE_BRANCHES: release, release.*, topic/zip-release
-          DEFAULT_BRAND: release
+          DEFAULT_BRANCH: release
