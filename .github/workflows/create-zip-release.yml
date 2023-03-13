@@ -2,40 +2,52 @@ name: Deploy release
 
 on:
   pull_request:
+    
     branches:
+      ## Workflow will only run when PR is made to main branch
       - main
+
     types:
+      ## Pull requests can be labeled or unlabeled
       - labeled
+      - unlabeled
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    ## Steps will only run if pull request has label: release
-    if: ${{ github.event.label.name == 'release' }}
 
+  build:
+
+    runs-on: ubuntu-latest
+    ## Steps will only run if pull request has label: release and/or the commit message contains "#release"
+    if: contains(${{ github.event.head_commit.message }}, '#release') || ${{ github.event.label.name == 'release' }}
 
     steps:
       
-      - name: Checkout repo
+      ## Checkout repo in runner
+      - name: Checkout epo
         uses: actions/checkout@v2
 
-      - name: Create Release Folder
+      ## Create a folder "release/", omit files in --exclude=""
+      - name: Create release directory
         run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
       
-      - name: Switch to Release Folder
+      ## CD into the release/ dir
+      - name: Switch to release directory
         run: |
           cd release
           ls -la
 
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Bump version and push tag
+      ## Bump tag version (i.e. v0.1.0 -> v0.2.0), push tag to repository
+      - name: Bump version & push tag
         uses: anothrNick/github-tag-action@master
         env:
           ## PAT generated on Github, added to repo as secret
           GITHUB_TOKEN: ${{ secrets.NVIM_GITHUB_TOKEN }}
           REPO_OWNER: redjax
+          ## Prepend "v" to version, i.e. 0.1.0 -> v0.1.0
           WITH_V: true
-          RELEASE_BRANCHES: release
+          ## Comma separated list of branches (bash reg exp accepted) that
+          #  will generate the release tags. Other branches and pull-requests
+          #  generate versions postfixed with the commit hash and do not generate
+          #  any tag. Examples: master or .* or release.*,hotfix.*,master
+          RELEASE_BRANCHES: release, release.*, topic/zip-release
           DEFAULT_BRAND: release
