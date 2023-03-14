@@ -1,11 +1,11 @@
 " Environment detection {{{
-if has("win32") || has("win64")
-    let g:plugged_home = "~/AppData/Local/nvim/plugged"
+" if has("win32") || has("win64")
+"     let g:plugged_home = "~/AppData/Local/nvim/plugged"
 
-else
-    let g:plugged_home = "~/.local/share/nvim/plugged"
+" else
+"     let g:plugged_home = "~/.local/share/nvim/plugged"
 
-endif
+" endif
 
 "}}}
 
@@ -151,13 +151,26 @@ set nowritebackup
 
 
 " session management
-if has("win32") || has("win64")
+let g:session_directory = g:d_nvim_base . '/session'
 
-    let g:session_directory = "~/AppData/Local/nvim/session"
+" if has("win32") || has("win64")
 
-elseif has("unix")
+"     let g:session_directory = '~/AppData/Local/nvim/session'
 
-    let g:session_directory = "~/.config/nvim/session"
+" elseif has("unix")
+
+"     let g:session_directory = '~/.config/nvim/session'
+
+"     " Tries to set shell from env, defaults to bash
+"     if exists("$SHELL")
+"         set shell=$SHELL
+"     else
+"         set shell=/bin/sh
+"     endif
+
+" end
+
+if has("unix")
 
     " Tries to set shell from env, defaults to bash
     if exists("$SHELL")

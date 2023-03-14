@@ -59,33 +59,51 @@
 
     call plug#begin(g:plugged_home)
 
-        if has("win32") || has("win64")
-            " Windows environment
-
-            " Include user's extra bundle(s)
-            if filereadable(expand('~/AppData/Local/nvim/local_bundles.vim'))
-                source ~/AppData/Local/nvim/local_bundles.vim
-            endif
-
-            " Source vim plugin installs
-            if filereadable(expand('~/AppData/Local/nvim/conf/vimplug/plug-installs.vim'))
-                source ~/AppData/Local/nvim/conf/vimplug/plug-installs.vim
-            end
-
-        elseif has("unix")
-            " Linux/Mac environment
-
-            " Include user's extra bundle(s)
-            if filereadable(expand('~/.config/nvim/local_bundles.vim'))
-                source ~/.config/nvim/local_bundles.vim
-            endif
-
-            " Source vim plugin installs
-            if filereadable(expand('~/.config/nvim/conf/vimplug/plug-installs.vim'))
-                source ~/.config/nvim/conf/vimplug/plug-installs.vim
-            end
-
+        " Include user's extra bundle(s)
+        " if filereadable(expand('~/AppData/Local/nvim/local_bundles.vim'))
+        if filereadable(expand(g:d_nvim_base . '/local_bundles.vim'))
+            " source ~/AppData/Local/nvim/local_bundles.vim
+            source g:d_nvim_base . '/local_bundles.vim'
         endif
+
+        " Source vim plugin installs
+        " if filereadable(expand('~/AppData/Local/nvim/conf/vimplug/plug-installs.vim'))
+        if filereadable(expand(g:d_vimplug_conf . '/plug_installs.vim'))
+            " source ~/AppData/Local/nvim/conf/vimplug/plug-installs.vim
+            source g:d_vimplug_conf . '/plug_installs.vim'
+        end
+
+        " if has("win32") || has("win64")
+        "     " Windows environment
+
+        "     " Include user's extra bundle(s)
+        "     " if filereadable(expand('~/AppData/Local/nvim/local_bundles.vim'))
+        "     if filereadable(expand(g:d_nvim_base . '/local_bundles.vim'))
+        "         " source ~/AppData/Local/nvim/local_bundles.vim
+        "         source g:d_nvim_base . '/local_bundles.vim'
+        "     endif
+
+        "     " Source vim plugin installs
+        "     " if filereadable(expand('~/AppData/Local/nvim/conf/vimplug/plug-installs.vim'))
+        "     if filereadable(expand(g:d_vimplug_conf . '/plug_installs.vim'))
+        "         " source ~/AppData/Local/nvim/conf/vimplug/plug-installs.vim
+        "         source g:d_vimplug_conf . '/plug_installs.vim'
+        "     end
+
+        " elseif has("unix")
+        "     " Linux/Mac environment
+
+        "     " Include user's extra bundle(s)
+        "     if filereadable(expand('~/.config/nvim/local_bundles.vim'))
+        "         source ~/.config/nvim/local_bundles.vim
+        "     endif
+
+        "     " Source vim plugin installs
+        "     if filereadable(expand('~/.config/nvim/conf/vimplug/plug-installs.vim'))
+        "         source ~/.config/nvim/conf/vimplug/plug-installs.vim
+        "     end
+
+        " endif
 
     " End Vim plug
     call plug#end()
