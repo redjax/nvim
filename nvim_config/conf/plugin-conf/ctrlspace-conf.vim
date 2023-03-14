@@ -3,24 +3,24 @@
 if has('win32')
     " Windows Environment
 
-    let s:vimfiles = '~/AppData/Local/nvim-data'
-    let s:os   = 'windows'
+    let g:vimfiles = '~/AppData/Local/nvim-data'
+    let g:os   = 'windows'
 
 else
     " Linux/Mac Environment
 
-    let s:vimfiles = '~/.vim'
+    let g:vimfiles = '~/.vim'
     
     if has('mac') || has('gui_macvim')
-        let s:os = 'darwin'
+        let g:os = 'darwin'
     else
     " elseif has('gui_gtk2') || has('gui_gtk3')
-        let s:os = 'linux'
+        let g:os = 'linux'
     endif
 
 endif
 
-let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_engine_' . s:os . '_amd64'
+let g:CtrlSpaceFileEngine = g:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_engine_' . g:os . '_amd64'
 
 " Turn tabline off
 set showtabline=0
