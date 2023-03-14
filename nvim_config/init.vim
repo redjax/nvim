@@ -29,16 +29,25 @@
 " endif
 "
 
-if has('win32') || has('win64')
-    " Set nvim conf base directory paths for Windows environments
+" Check OS nvim is running on
+let g:uname = substitute(system('uname'), '\n', '', '')
 
-    let g:d_nvim_base = '~/AppData/Local/nvim'
+" if has('win32') || has('win64')
+"     " Set nvim conf base directory paths for Windows environments
 
-elseif has('unix')
-    " Set nvim conf base directory path for Linux environments
+"     let g:d_nvim_base = '~/AppData/Local/nvim'
 
+" elseif has('unix')
+"     " Set nvim conf base directory path for Linux environments
+
+"     let g:d_nvim_base = '~/.config/nvim'
+
+" end
+
+if has('linux') || has('mac')
     let g:d_nvim_base = '~/.config/nvim'
-
+elseif has('win32') || has('win64')
+    let g:d_nvim_base = '~/AppData/Local/nvim'
 end
 
 " Set path to autoload/ with vim-plug's autoload script
@@ -53,42 +62,43 @@ let g:d_vimplug_conf = g:d_nvim_conf . '/vimplug'
 let g:d_vimplug_plugin_conf = g:d_vimplug_conf . '/plugin-conf'
 
 " Set script vars (local to init.vim) for *.vim files
-let s:f_environment_vim = g:d_nvim_conf . '/environment.vim'
-let s:f_key_mappings_vim = g:d_nvim_conf . '/key-mappings.vim'
-let s:f_autocmd_rules_vim = g:d_nvim_conf . '/autocmd-rules.vim'
-let s:f_vimplug_core = g:d_vimplug_conf . '/vimplug-core.vim'
-let s:f_plug_installs = g:d_vimplug_conf . '/plug-installs.vim'
+let g:f_environment_vim = g:d_nvim_conf . '/environment.vim'
+let g:f_key_mappings_vim = g:d_nvim_conf . '/key-mappings.vim'
+let g:f_autocmd_rules_vim = g:d_nvim_conf . '/autocmd-rules.vim'
+let g:f_vimplug_core = g:d_vimplug_conf . '/vimplug-core.vim'
+let g:f_plug_installs = g:d_vimplug_conf . '/plug-installs.vim'
 
 
 " Environment
 " if filereadable(expand('~/AppData/Local/nvim/conf/environment.vim'))
-if filereadable(expand(s:f_environment_vim))
+if filereadable(expand('g:f_environment_vim'))
     " source ~/AppData/Local/nvim/conf/environment.vim
-    source s:f_environment_vim
+    source g:f_environment_vim
 end
 
 " Mappings
 " if filereadable(expand('~/AppData/Local/nvim/conf/key-mappings.vim'))
-if filereadable(expand(s:f_key_mappings_vim))
+if filereadable(expand('g:f_key_mappings_vim'))
     " source ~/AppData/Local/nvim/conf/key-mappings.vim
-    source s:f_key_mappings_vim
+    source g:f_key_mappings_vim
 end
 
 " autocmd Rules
 " if filereadable(expand('~/AppData/Local/nvim/conf/autocmd-rules.vim'))
-if filereadable(expand(s:f_autocmd_rules_vim))
+if filereadable(expand('g:f_autocmd_rules_vim'))
     " source ~/AppData/Local/nvim/conf/autocmd-rules.vim
-    source s:f_autocmd_rules_vim
+    source g:f_autocmd_rules_vim
 end
 
 " Vim Plug plugin manager
 " if filereadable(expand('~/AppData/Local/nvim/conf/vimplug/vimplug-core.vim'))
-if filereadable(expand(s:f_vimplug_core))
+if filereadable(expand('g:f_vimplug_core'))
     " source ~/AppData/Local/nvim/conf/vimplug/vimplug-core.vim
+    source g:f_vimplug_core
 end
 
 " Loop over plugin configurations
 " for f in split(glob('~/AppData/Local/nvim/conf/plugin-conf/*.vim'), '\n')
-for f in split(glob(s:d_vimplug_plugin_conf), '\n')
+for f in split(glob('g:d_vimplug_plugin_conf'), '\n')
     exe 'source' f
 endfor
