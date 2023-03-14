@@ -104,6 +104,38 @@ function install_vimplug() {
 
 }
 
+function fix_nvim_conf_chmod() {
+
+    echo "Setting owner of ~/.config/nvim to $USER"
+    sudo chown -R $USER:$USER $HOME/.config/nvim
+
+    echo "Setting chmod to 700 on ~/.config/nvim"
+    chmod 700 $HOME/.config/nvim
+
+}
+
+function copy_to_local_bin() {
+
+    if [[ ! -f /usr/local/bin/nvim ]]; then
+
+        if [[ ! -f /usr/bin/nvim ]]; then
+            echo "Could not find nvim binary at /usr/bin/nvim"            
+
+        else
+            echo "nvim does not exist at /usr/local/bin. Copying from /usr/bin/nvim"
+            sudo cp /usr/bin/nvim /usr/local/bin/nvim
+
+        fi
+
+    else
+        echo "nvim binary exists at /usr/local/bin/nvim"
+    fi
+
+    echo "Setting executable on /usr/local/bin/nvim"
+    sudo chmod +x /usr/local/bin/nvim
+
+}
+
 function main() {
 
     install_nvim
@@ -113,6 +145,10 @@ function main() {
     update_from_git
 
     install_vimplug
+
+    fix_nvim_conf_chmod
+
+    # copy_to_local_bin
 
 }
 
