@@ -170,7 +170,7 @@ let g:session_directory = g:d_nvim_base . '/session'
 
 " end
 
-if has("unix")
+if g:uname == 'Linux' || g:uname == 'Darwin'
 
     " Tries to set shell from env, defaults to bash
     if exists("$SHELL")

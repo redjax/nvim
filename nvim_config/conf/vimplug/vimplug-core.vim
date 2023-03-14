@@ -4,12 +4,78 @@
         set nocompatible " Be iMproved
     endif
 
-    if has("win32") || has("win64")
-        " Windows Vim Plug setup
+    " if has("win32") || has("win64")
+    "     " Windows Vim Plug setup
 
+    "     let g:plugged_home = '~/AppData/Local/nvim-data/plugged'
+
+    "     let vimplug_exists=expand('~/AppData/Local/nvim/autoload/plug.vim')
+
+    "     let g:vim_bootstrap_langs = 'python'
+    "     let g:vim_bootstrap_editor = 'nvim'
+
+    "     " Install vim-plug if it's not already installed {{{
+
+    "         if !filereadable(vimplug_exists)
+    "             echo 'Installing Vim Plug...'
+    "             echo '
+    "             silent !\curl -fLo ~/AppData/Local/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    "             let g:not_finish_vimplug = 'yes'
+
+    "             autocmd VimEnter * PlugInstall
+    "         endif
+
+    "     "}}}
+
+    " elseif has('unix')
+    "     " Linux/Mac environment
+
+    "     let g:plugged_home = '~/.local/share/nvim/plugged'
+
+    "     let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+
+    "     let g:vim_bootstrap_langs = 'python'
+    "     let g:vim_bootstrap_editor = 'nvim'
+
+    "     " Install vim-plug if it's not already installed {{{
+
+    "     if !filereadable(vimplug_exists)
+    "         echo 'Installing Vim Plug...'
+    "         echo '
+    "         silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    "         let g:not_finish_vimplug = "yes"
+
+    "         autocmd VimEnter * PlugInstall
+    "     endif
+
+    "     "}}}
+
+    " endif
+
+    if has('linux') || has('mac')
+            " Linux/Mac environment
+
+        let g:plugged_home = '~/.local/share/nvim/plugged'
+
+        let vimplug_exists=expand('g:d_autoload_conf' . '/plug.vim')
+
+        let g:vim_bootstrap_langs = 'python'
+        let g:vim_bootstrap_editor = 'nvim'
+
+        " Install vim-plug if it's not already installed {{{
+
+        if !filereadable(vimplug_exists)
+            echo 'Installing Vim Plug...'
+            echo '
+            silent !\curl -fLo g:d_autoload_conf . '/plug.vim' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+            let g:not_finish_vimplug = "yes"
+
+            autocmd VimEnter * PlugInstall
+        endif
+    elseif has('win32') || has('win64')
         let g:plugged_home = '~/AppData/Local/nvim-data/plugged'
 
-        let vimplug_exists=expand('~/AppData/Local/nvim/autoload/plug.vim')
+        let vimplug_exists=expand('g:d_autoload_conf' . '/plug.vim')
 
         let g:vim_bootstrap_langs = 'python'
         let g:vim_bootstrap_editor = 'nvim'
@@ -24,33 +90,7 @@
 
                 autocmd VimEnter * PlugInstall
             endif
-
-        "}}}
-
-    elseif has('unix')
-        " Linux/Mac environment
-
-        let g:plugged_home = '~/.local/share/nvim/plugged'
-
-        let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
-
-        let g:vim_bootstrap_langs = 'python'
-        let g:vim_bootstrap_editor = 'nvim'
-
-        " Install vim-plug if it's not already installed {{{
-
-        if !filereadable(vimplug_exists)
-            echo 'Installing Vim Plug...'
-            echo '
-            silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-            let g:not_finish_vimplug = "yes"
-
-            autocmd VimEnter * PlugInstall
-        endif
-
-        "}}}
-
-    endif
+    end
 
 "}}}
 
