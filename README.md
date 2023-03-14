@@ -185,5 +185,12 @@ let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_e
     - i.e. Run `:PlugInstall` and `:PlugClean`, then exit
     - `nvim +PlugInstall +PlugClean +qa`
 
+- Run `nvim :call/:echo/etc` commands from CLI
+  - Use the `--headless` and `-c` flags to run nvim commands from CLI
+  - i.e. to run nvim, then run `:call mkdir(stdpath('config'), 'p')` (which creates the `~/.config/nvim` path if it does not exist):
+    - `nvim --headless -c "call mkdir(stdpath('config'), 'p')" +qa`
+  - i.e. to run nvim, then run `:echo stdpath('config')` (which echoes the path to nvim's configuration directory):
+    - `nvim --headless -c "echo stdpath('config')`
+
 ### Links
 
