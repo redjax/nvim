@@ -1,7 +1,10 @@
 -- # This config utilizes the map function defined in conf/globals.lua
 
+local map = require("utils").map
+
 -- # Set leader & local leader keys
-vim.api.nvim_set_keymap("", ",", "<Nop>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("", ",", "<Nop>", { noremap = true, silent = true })
+map("", ",", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
