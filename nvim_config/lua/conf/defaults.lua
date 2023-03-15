@@ -53,18 +53,6 @@ opt.hidden = true
 -- ?
 opt.history = 5000
 
-
-
--- Highlight on yank
---   This is configured with a vim.cmd block, which
---   enables running vimscript for lua-incompatible config
-vim.cmd [[
-    augroup YankHighlight
-        autocmd!
-        autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-    augroup end
-]]
-
 -- Set patterns for nvim to ignore
 opt.wildignore = {
     '*/cache/*',
