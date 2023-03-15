@@ -117,6 +117,7 @@ if [[ -f nvim.appimage ]]; then
 
   sudo mv squashfs-root $nvim_appimage_install_dir
 
+  remove_existing_squashfs
 
   if [[ ! -f "/usr/bin/nvim" ]]; then
     echo ""
