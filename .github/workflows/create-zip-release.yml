@@ -5,10 +5,11 @@ name: Deploy release
 
 on:
   pull_request:
+    branches:
+      - main
     types:
       ## Pull requests can be labeled or unlabeled
       - labeled
-      - unlabeled
 
 jobs:
 
