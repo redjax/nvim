@@ -206,3 +206,4 @@ let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_e
   - Another awesome reference repository
 - [Dev.to: using vim-plug in lua](https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom)
 - [Medium: Neovim for beginners - init.lua](https://alpha2phi.medium.com/neovim-for-beginners-init-lua-45ff91f741cb)
+- [Meetgor.com: Neovim Vimscript to Lua](https://www.meetgor.com/neovim-vimscript-to-lua/)
