@@ -44,3 +44,9 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     desc = "Set filetype to cmake",
     command = "setLocal filetype=cmake"
 })
+
+-- Automatically sync plugins when plugins are added/removed
+-- augroup packer_user_config
+--   autocmd!
+--   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+-- augroup end
