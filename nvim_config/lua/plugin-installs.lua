@@ -100,12 +100,12 @@ packer.startup(function()
 
     -- # Preview code
 	-- https://github.com/rmagatti/goto-preview
-    -- use({
-	-- 	"rmagatti/goto-preview",
-	-- 	config = function()
-	-- 		require("plugins.goto-preview-nvim")
-	-- 	end,
-	-- })
+    use({
+		"rmagatti/goto-preview",
+		config = function()
+			require("plugins.goto-preview")
+		end,
+	})
 
     -- # LSP & DAP & Linter & Formatter package manager
 	-- https://github.com/williamboman/mason.nvim
@@ -136,12 +136,12 @@ packer.startup(function()
 
     -- # Keep last position
 	-- https://github.com/ethanholz/nvim-lastplace
-	-- use({
-	-- 	"ethanholz/nvim-lastplace",
-	-- 	config = function()
-	-- 		require("plugins.lastplace-nvim")
-	-- 	end,
-	-- })
+	use({
+		"ethanholz/nvim-lastplace",
+		config = function()
+			require("plugins.lastplace")
+		end,
+	})
 
     -- Peek lines immediately with :<line_number>
 	-- https://github.com/nacro90/numb.nvim
@@ -163,31 +163,31 @@ packer.startup(function()
 
     -- # Display vertical indent lines
 	-- https://github.com/lukas-reineke/indent-blankline.nvim
-	-- use({
-	-- 	"lukas-reineke/indent-blankline.nvim",
-	-- 	config = function()
-	-- 		require("plugins.indent-blankline-nvim")
-	-- 	end,
-	-- })
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("plugins.indent-blankline")
+		end,
+	})
 
     -- # Show git sign: inserted, modified, deleted vs..
 	--   also git blamer
 	-- https://github.com/lewis6991/gitsigns.nvim
-	-- use({
-	-- 	"lewis6991/gitsigns.nvim",
-	-- 	config = function()
-	-- 		require("plugins.git-signs-nvim")
-	-- 	end,
-	-- })
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("plugins.git-signs")
+		end,
+	})
 
     -- # Insert or delete brackets, parens, quotes in pair.
 	-- https://github.com/windwp/nvim-autopairs
-	-- use({
-	-- 	"windwp/nvim-autopairs",
-	-- 	config = function()
-	-- 		require("plugins.autopairs-nvim")
-	-- 	end,
-	-- })
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("plugins.autopairs")
+		end,
+	})
 
     -- # Icons pack
 	-- https://github.com/kyazdani42/nvim-web-devicons
