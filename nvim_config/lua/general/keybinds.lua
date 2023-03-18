@@ -1,9 +1,9 @@
 -- # Global keybinds
 
 -- Set leader key
-Keybind.g({{ "", ",", "<Nop>", { noremap = true, silent = true } }})
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
+-- Keybind.g({{ "", ",", "<Nop>", { noremap = true, silent = true } }})
+-- vim.g.mapleader = ","
+-- vim.g.maplocalleader = ","
 
 Keybind.g({
 

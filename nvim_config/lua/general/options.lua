@@ -1,5 +1,6 @@
 -- # Globals
 Option.g({
+    bg = "dark",
     encoding = "UTF-8",
     -- Safe-load Vim config files
     exrc = true,
@@ -57,11 +58,22 @@ Option.g({
     splitbelow = true,
     -- Hide unsaved file when closing vuffer
     hidden = true,
-
-    --[[
-        UI options
-    ]]
-    termguicolors = true,
+    -- Enable indent break
+    breakindent = true,
+    -- -- Decrease update time
+    updatetime = 250,
+    -- -- Always show sign column
+    signcolumn = "yes",
+    -- -- Access system clipboard
+    clipboard = "unnamedplus",
+    -- -- ?
+    history = 5000,
+    -- -- Set patterns for nvim to ignore
+    -- wildignore = {
+    --     '*/cache/*',
+    --     '*/tmp/*',
+    -- },
+    
 })
 
 -- Window options
@@ -83,6 +95,6 @@ Option.w({
     --   If buffer can't display more than 200 lines, cursor will stay in center
     --     and scroll buffer.
     scrolloff = 0,
-    wrap = false,
+    wrap = true,
     colorcolumn = "80",
 })
