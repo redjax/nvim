@@ -1,6 +1,5 @@
 -- # Globals
 Option.g({
-    bg = "dark",
     encoding = "UTF-8",
     -- Safe-load Vim config files
     exrc = true,
