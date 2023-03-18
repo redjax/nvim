@@ -1,1 +1,1 @@
-require "plugins.airline.settings"
+-- require "plugins.airline.settings"

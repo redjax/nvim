@@ -44,11 +44,13 @@ packer.startup(function()
 	-- https://github.com/wbthomason/packer.nvim
     use({'wbthomason/packer.nvim'})
 
-    -- # Airline
-	-- https://github.com/vim-airline/vim-airline
-    use({'vim-airline/vim-airline'})
-	-- https://github.com/vim-airline/vim-airline
-    use({'vim-airline/vim-airline-themes'})
+	-- https://github.com/nvim-lualine/lualine.nim
+	use({
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("plugins.lualine")
+		end
+	})
 
     -- # Markdown Preview
 	-- https://github.com/iamcco/markdown-preview.nvim
@@ -152,12 +154,12 @@ packer.startup(function()
 
     -- # Git plugin
 	-- https://github.com/tpope/vim-fugitive
-	-- use({
-	-- 	"tpope/vim-fugitive",
-	-- 	config = function()
-	-- 		require("plugins.fugitive")
-	-- 	end,
-	-- })
+	use({
+		"tpope/vim-fugitive",
+		config = function()
+			require("plugins.fugitive")
+		end,
+	})
 
     -- # Display vertical indent lines
 	-- https://github.com/lukas-reineke/indent-blankline.nvim
@@ -200,15 +202,138 @@ packer.startup(function()
 	-- 	end,
 	-- })
 
+	-- https://github.com/kylechui/nvim-surround
+	use({
+		"kylechui/nvim-surround",
+		config = function()
+			require("plugins.surround")
+		end,
+	})
+
     -- Popup terminal
 	-- https://github.com/akinsho/toggleterm.nvim
-	-- use({
-	-- 	"akinsho/toggleterm.nvim",
-	-- 	tag = "v2.*",
-	-- 	config = function()
-	-- 		require("plugins.toggleterm-nvim")
-	-- 	end,
-	-- })
+	use({
+		"akinsho/toggleterm.nvim",
+		tag = "v2.*",
+		config = function()
+			require("plugins.toggleterm")
+		end,
+	})
+
+	-- Git diff preview
+	use({
+		"sindrets/diffview.nvim",
+		config = function()
+			require("plugins.diffview")
+		end,
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	})
+
+	-- # Nvim-treesitter & extensions
+
+	-- https://github.com/nvim-treesitter/nvim-treesitter
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = function()
+			require("plugins.nvim-treesitter")
+		end,
+	})
+
+	-- https://github.com/nvim-treesitter/nvim-treesitter/nvim-treesitter-textobjects
+	use({
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- https://github.com/nvim-treesitter/nvim-treesitter/nvim-treesitter-refactor
+	use({
+		"nvim-treesitter/nvim-treesitter-refactor",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- https://github.com/nvim-treesitter/nvim-treesitter/playground
+	use({
+		"nvim-treesitter/playground",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- https://github.com/nvim-treesitter/windwp/nvim-ts-autotag
+	use({
+		"windwp/nvim-ts-autotag",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- https://github.com/nvim-treesitter/theHamsta/nvim-treesitter-pairs
+	use({
+		"theHamsta/nvim-treesitter-pairs",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- # End nvim-treesitter & extensions
+
+	-- https://github.com/nvim-lua/plenary.nvim
+	--   Lua utils
+	use({ "nvim-lua/plenary.nvim" })
+
+	-- # Telscope & extensions
+	
+	-- https://github.com/nvim-telescope/telescope.nvim
+	use({
+		"nvim-telescope/telescope.nvim",
+		config = function()
+			require("plugins.telescope")
+		end,
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
+	-- https://github.com/nvim-telescope/telescope-fzf-native.nvim
+	use({
+		"nvim-telescope/telescope-fzf-native.nvim",
+		run = "make",
+		requires = {
+			"nvim-telescope/telescope.nvim",
+		},
+	})
+
+	-- https://github.com/nvim-telescope/telescope-symbols.nvim
+	use({
+		"nvim-telescope/telescope-symbols.nvim",
+		requires = {
+			"nvim-telescope/telescope.nvim",
+		},
+	})
+
+	-- https://github.com/nvim-telescope/telescope-github.nvim
+	use({
+		"nvim-telescope/telescope-github.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+	})
+
+	-- https://github.com/LinArcX/telescope-env.nvim
+	use({
+		"LinArcX/telescope-env.nvim",
+		requires = {
+			"nvim-telescope/telescope.nvim",
+		},
+	})
+
+	-- # End Telescope & extensions
 
     -- Initialize Packer
     if PACKER_BOOTSTRAP then
