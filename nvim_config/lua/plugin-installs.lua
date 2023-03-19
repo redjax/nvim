@@ -60,7 +60,7 @@ packer.startup(function()
 			vim.fn["mkdp#util#install"]()
 		end,
 	})
-    
+
 	-- # Nvim's LSP manager
 	-- https://github.com/neovim/nvim-lspconfig
     -- use({
@@ -100,12 +100,14 @@ packer.startup(function()
 
     -- # Preview code
 	-- https://github.com/rmagatti/goto-preview
-    use({
-		"rmagatti/goto-preview",
-		config = function()
-			require("plugins.goto-preview")
-		end,
-	})
+	if OS == "Linux" then
+		use({
+			"rmagatti/goto-preview",
+			config = function()
+				require("plugins.goto-preview")
+			end,
+		})
+	end
 
     -- # LSP & DAP & Linter & Formatter package manager
 	-- https://github.com/williamboman/mason.nvim
@@ -289,49 +291,60 @@ packer.startup(function()
 	use({ "nvim-lua/plenary.nvim" })
 
 	-- # Telscope & extensions
-	
+
 	-- https://github.com/nvim-telescope/telescope.nvim
-	use({
-		"nvim-telescope/telescope.nvim",
-		config = function()
-			require("plugins.telescope")
-		end,
-		requires = { "nvim-lua/plenary.nvim" },
-	})
-
-	-- https://github.com/nvim-telescope/telescope-fzf-native.nvim
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "make",
-		requires = {
+	if OS == "Linux" then
+		use({
 			"nvim-telescope/telescope.nvim",
-		},
-	})
+			config = function()
+				require("plugins.telescope")
+			end,
+			requires = { "nvim-lua/plenary.nvim" },
+		})
 
-	-- https://github.com/nvim-telescope/telescope-symbols.nvim
-	use({
-		"nvim-telescope/telescope-symbols.nvim",
-		requires = {
-			"nvim-telescope/telescope.nvim",
-		},
-	})
+		-- https://github.com/nvim-telescope/telescope-fzf-native.nvim
+		-- if OS == "Windows_NT" then
+			
+		-- 	use {
+		-- 		'nvim-telescope/telescope-fzf-native.nvim',
+		-- 		run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+		-- 	}
 
-	-- https://github.com/nvim-telescope/telescope-github.nvim
-	use({
-		"nvim-telescope/telescope-github.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	})
+		-- else
+		use({
+			"nvim-telescope/telescope-fzf-native.nvim",
+			run = "make",
+			requires = {
+				"nvim-telescope/telescope.nvim",
+			},
+		})
+		-- end
 
-	-- https://github.com/LinArcX/telescope-env.nvim
-	use({
-		"LinArcX/telescope-env.nvim",
-		requires = {
-			"nvim-telescope/telescope.nvim",
-		},
-	})
+		-- https://github.com/nvim-telescope/telescope-symbols.nvim
+		use({
+			"nvim-telescope/telescope-symbols.nvim",
+			requires = {
+				"nvim-telescope/telescope.nvim",
+			},
+		})
+
+		-- https://github.com/nvim-telescope/telescope-github.nvim
+		use({
+			"nvim-telescope/telescope-github.nvim",
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope.nvim",
+			},
+		})
+
+		-- https://github.com/LinArcX/telescope-env.nvim
+		use({
+			"LinArcX/telescope-env.nvim",
+			requires = {
+				"nvim-telescope/telescope.nvim",
+			},
+		})
+	end
 
 	-- # End Telescope & extensions
 
