@@ -189,12 +189,14 @@ packer.startup(function()
 
     -- # Insert or delete brackets, parens, quotes in pair.
 	-- https://github.com/windwp/nvim-autopairs
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("plugins.autopairs")
-		end,
-	})
+	if _OS == "Linux" then
+		use({
+			"windwp/nvim-autopairs",
+			config = function()
+				require("plugins.autopairs")
+			end,
+		})
+	end
 
     -- # Icons pack
 	-- https://github.com/kyazdani42/nvim-web-devicons
@@ -239,55 +241,58 @@ packer.startup(function()
 	})
 
 	-- # Nvim-treesitter & extensions
+	if _OS == "Linux" then
 
-	-- https://github.com/nvim-treesitter/nvim-treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-		config = function()
-			require("plugins.nvim-treesitter")
-		end,
-	})
-
-	-- https://github.com/nvim-treesitter/nvim-treesitter/nvim-treesitter-textobjects
-	use({
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		requires = {
+		-- https://github.com/nvim-treesitter/nvim-treesitter
+		use({
 			"nvim-treesitter/nvim-treesitter",
-		},
-	})
+			run = ":TSUpdate",
+			config = function()
+				require("plugins.nvim-treesitter")
+			end,
+		})
 
-	-- https://github.com/nvim-treesitter/nvim-treesitter/nvim-treesitter-refactor
-	use({
-		"nvim-treesitter/nvim-treesitter-refactor",
-		requires = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-	})
+		-- https://github.com/nvim-treesitter/nvim-treesitter/nvim-treesitter-textobjects
+		use({
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			requires = {
+				"nvim-treesitter/nvim-treesitter",
+			},
+		})
 
-	-- https://github.com/nvim-treesitter/nvim-treesitter/playground
-	use({
-		"nvim-treesitter/playground",
-		requires = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-	})
+		-- https://github.com/nvim-treesitter/nvim-treesitter/nvim-treesitter-refactor
+		use({
+			"nvim-treesitter/nvim-treesitter-refactor",
+			requires = {
+				"nvim-treesitter/nvim-treesitter",
+			},
+		})
 
-	-- https://github.com/nvim-treesitter/windwp/nvim-ts-autotag
-	use({
-		"windwp/nvim-ts-autotag",
-		requires = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-	})
+		-- https://github.com/nvim-treesitter/nvim-treesitter/playground
+		use({
+			"nvim-treesitter/playground",
+			requires = {
+				"nvim-treesitter/nvim-treesitter",
+			},
+		})
 
-	-- https://github.com/nvim-treesitter/theHamsta/nvim-treesitter-pairs
-	use({
-		"theHamsta/nvim-treesitter-pairs",
-		requires = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-	})
+		-- https://github.com/nvim-treesitter/windwp/nvim-ts-autotag
+		use({
+			"windwp/nvim-ts-autotag",
+			requires = {
+				"nvim-treesitter/nvim-treesitter",
+			},
+		})
+
+		-- https://github.com/nvim-treesitter/theHamsta/nvim-treesitter-pairs
+	
+		use({
+			"theHamsta/nvim-treesitter-pairs",
+			requires = {
+				"nvim-treesitter/nvim-treesitter",
+			},
+		})
+	end
 
 	-- # End nvim-treesitter & extensions
 
