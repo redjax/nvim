@@ -2,6 +2,11 @@
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
+-- Define host environment
+local uname = vim.loop.os_uname()
+-- Set local env var for OS
+local _OS = uname.sysname
+
 -- Install Packer if not installed already
 if fn.empty(fn.glob(install_path)) > 0 then
 	PACKER_BOOTSTRAP =
@@ -100,7 +105,7 @@ packer.startup(function()
 
     -- # Preview code
 	-- https://github.com/rmagatti/goto-preview
-	if OS == "Linux" then
+	if _OS == "Linux" then
 		use({
 			"rmagatti/goto-preview",
 			config = function()
@@ -293,7 +298,7 @@ packer.startup(function()
 	-- # Telscope & extensions
 
 	-- https://github.com/nvim-telescope/telescope.nvim
-	if OS == "Linux" then
+	if _OS == "Linux" then
 		use({
 			"nvim-telescope/telescope.nvim",
 			config = function()
