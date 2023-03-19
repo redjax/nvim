@@ -12,6 +12,7 @@
     - [Will/Might Try](#willmight-try)
   - [Links \& Notes](#links--notes)
     - [Notes](#notes)
+      - [Lua notes](#lua-notes)
     - [Links](#links)
 
 ## Description
@@ -184,6 +185,45 @@ let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_e
   - You can also open nvim, run a command, and exit with `+qa`
     - i.e. Run `:PlugInstall` and `:PlugClean`, then exit
     - `nvim +PlugInstall +PlugClean +qa`
+
+#### Lua Notes
+
+I have started rewriting the configuration files for neovim in Lua. Some notes are irrelevant or will not work in Lua. This section is for Lua-specific notes.
+
+- Detect host OS and only run certain commands on specific host
+  - First, set local variables at the top of the `.lua` file
+
+```
+-- Define host environment
+local uname = vim.loop.os_uname()
+-- Set local env var for OS
+local _OS = uname.sysname
+```
+
+  - Then, you can reference the `_OS` var to do a string comparison
+  - For example, to only install a plugin (i.e. `markdown-preview`) only on `Linux` hosts:
+
+```
+-- Define host environment
+local uname = vim.loop.os_uname()
+-- Set local env var for OS
+local _OS = uname.sysname
+
+if _OS == "Linux" then
+  print("Linux host detected. Installing markdown-preview.nvim)
+  use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	})
+else
+  print("Nvim is not running in a Linux environment, skipping install of markdown-preview.nvim")
+end
+```
+
+  - In this example, the `markdown-preview.nvim` plugin will only be installed if the `_OS` string matches `"Linux"`
+  - The line will be skipped on Mac/Windows environment
 
 ### Links
 
