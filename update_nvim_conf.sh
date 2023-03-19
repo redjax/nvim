@@ -1,8 +1,5 @@
 ##
 # Copies nvim configuration from ./nvim_config to Linux nvim config dir
-#
-# TODO: Incorporate headless setup, i.e.:
-#   $ nvim --headless -c "call mkdir(stdpath('config'), 'p')" +qa
 ##
 
 ## The path must be absolute for symlink command to work
