@@ -110,19 +110,19 @@ My setup uses multiple plugins. I use [Vim Plug](https://github.com/junegunn/vim
 
 - Awesome Colorschemes
   - URL: https://github.com/rafi/awesome-vim-colorschemes
-  - Plug Install: Plug 'rafi/awesome-vim-colorschemes'
+  - Plug Install: `Plug 'rafi/awesome-vim-colorschemes'`
 
 - Colorschemes
   - URL: https://github.com/flazz/vim-colorschemes'
-  - Plug Install: Plug 'flazz/vim-colorschemes' 
+  - Plug Install: `Plug 'flazz/vim-colorschemes' `
 
 - Vim-Themes
   - URL: https://github.com/mswift42/vim-themes
-  - Plug Install: Plug 'mswift42/vim-themes'
+  - Plug Install: `Plug 'mswift42/vim-themes'`
 
 - Highlighted yank
   - URL: https://github.com/machakann/vim-highlightedyank
-  - Plug Install: Plug 'machakann/vim-highlightedyank'
+  - Plug Install: `Plug 'machakann/vim-highlightedyank'`
 
 ### Will/Might Try
 
@@ -185,5 +185,25 @@ let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_e
     - i.e. Run `:PlugInstall` and `:PlugClean`, then exit
     - `nvim +PlugInstall +PlugClean +qa`
 
+- Run `nvim :call/:echo/etc` commands from CLI
+  - Use the `--headless` and `-c` flags to run nvim commands from CLI
+  - i.e. to run nvim, then run `:call mkdir(stdpath('config'), 'p')` (which creates the `~/.config/nvim` path if it does not exist):
+    - `nvim --headless -c "call mkdir(stdpath('config'), 'p')" +qa`
+  - i.e. to run nvim, then run `:echo stdpath('config')` (which echoes the path to nvim's configuration directory):
+    - `nvim --headless -c "echo stdpath('config')`
+
 ### Links
 
+- [Neovim Docs: Lua guide](https://neovim.io/doc/user/lua-guide.html)
+  - Web version of Nvim's `:help lua` man pages
+- [DevGenius Medium: Create custom keymaps in neovim with lua](https://blog.devgenius.io/create-custom-keymaps-in-neovim-with-lua-d1167de0f2c2)
+- [Github: awesome-neovim](https://github.com/rockerBOO/awesome-neovim)
+- [Heiker Curiel Devlog on Github: Everything you need to know to configure neovim using lua](https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
+- [Heiker Curiel Devlog on Github: Build your first neovim configuration in lua](https://vonheikemen.github.io/devlog/tools/build-your-first-lua-config-for-neovim/)
+- [(Ref) Github: Tiagovla/.dotfiles](https://github.com/tiagovla/.dotfiles/tree/master/neovim/.config/nvim)
+  - An awesome reference repository
+- [(REF) Github: mthnglac/dotfiles](https://github.com/mthnglac/dotfiles/tree/master/nvim)
+  - Another awesome reference repository
+- [Dev.to: using vim-plug in lua](https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom)
+- [Medium: Neovim for beginners - init.lua](https://alpha2phi.medium.com/neovim-for-beginners-init-lua-45ff91f741cb)
+- [Meetgor.com: Neovim Vimscript to Lua](https://www.meetgor.com/neovim-vimscript-to-lua/)
