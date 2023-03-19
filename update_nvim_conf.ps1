@@ -20,30 +20,6 @@ function InstallNvim() {
 
 }
 
-function SymlinkNvimConfig() {
-    ## Create a symlink of this repo to ~/AppData/Local/nvim
-    #  This is the path where nvim looks for configurations on Windows.
-
-    Param(
-        [String]$source = "./nvim_config/",
-        [String]$dest = "~/AppData/Local/nvim"
-    )
-    If ( Test-Path $dest ) {
-        Write-Host "$($dest) exists, moving to $($dest).bak"
-
-        Move-Item $dest $dest.bak
-    }
-    
-    Write-Host "Creating symlink from $($source) to $($dest)"
-    
-    New-Item -ItemType SymbolicLink -Path "$($dest)" -Target "$($source)" -Force -ErrorAction Stop
-    
-    If ( $LASTEXITCODE -eq 1 ) {
-        Write-Error "There was an error creating the symlink."
-    }
-
-}
-
 function UpdateFromGit() {
     ## Update neovim configuration files from repo's main branch
 
@@ -69,17 +45,11 @@ function Main() {
     ## Ensure Neovim is installed
     InstallNvim
 
-    ## If nvim's config path doesn't exist, symlink this repo to the place it should be
-    If ( -Not (Test-Path -Path "~/AppData/Local/nvim") ) {
-        try {
-            SymlinkNvimConfig
-        }
-        catch {
-            Write-Error "There was an error creating the symlink to ~/AppData/local/nvim" -ErrorAction Stop
-        }
-        finally {
-            Write-Host "Symlink created successfully."
-        }
+    ## If nvim's config path exists, remove all items leaving parent dir
+    If ( Test-Path -Path "~/AppData/Local/nvim" ) {
+        Write-Host "Removing existing nvim conf directory"
+
+        Del "~/AppData/Local/nvim/*"
     }
 
     
@@ -91,23 +61,13 @@ function Main() {
     else {
 
         Write-Host ""
-        Write-Host "Neovim successfully reconfigured."
+        Write-Host "Changes pulled from git."
         Write-Host ""
     }
 
+    Write-Host "Copying config to ~/AppData/Local/nvim"
+    Copy-Item -Path "./nvim_config/*" -Destination "~/AppData/Local/nvim" -Recurse
+
 }
 
-Write-Host "Checking for elevated permissions..."
-
-if (-NOT (
-        [Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"
-    )
-) {
-    Write-Warning "This script needs to be run as an administrator in order to create the symlink to ~/AppData/Local/nvim."
-    Write-Warning "If you do not have admin, try downloading a release from:"
-    Write-Warning "  https://github.com/redjax/nvim/tags"
-    Break
-}
-else {
-    Main
-}
+Main
