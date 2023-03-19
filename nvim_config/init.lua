@@ -8,5 +8,13 @@
 --   require syntax uses 'lua' dir as starting point. For nested files/dirs,
 --     use dot notation, i.e. conf.some-file.lua
 
-require "conf"
-require "plugins"
+-- Speed up loading Lua modules
+if pcall(require, "impatient") then
+    require("impatient").enable_profile()
+else
+    print("Failed to load Impatient.")
+end
+
+require "plugin-installs"
+require "utils"
+require "general"
