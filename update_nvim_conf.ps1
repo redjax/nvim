@@ -49,7 +49,7 @@ function Main() {
     If ( Test-Path -Path "~/AppData/Local/nvim" ) {
         Write-Host "Removing existing nvim conf directory"
 
-        Del "~/AppData/Local/nvim/*"
+        Del -Recurse "~/AppData/Local/nvim/*"
     }
 
     
