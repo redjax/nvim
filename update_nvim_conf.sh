@@ -136,6 +136,30 @@ function copy_to_local_bin() {
 
 }
 
+function install_plugins() {
+
+  nvim +PackerInstall +qa
+
+  if [[ $? == 1 ]]; then
+    echo "PackerInstall command failed."
+  else
+    echo "PackerInstall command ran successfully."
+  fi
+
+}
+
+function update_plugins() {
+
+  nvim +PackerSync +qa
+
+  if [[ $? == 1 ]]; then
+    echo "PackerSync command failed."
+  else
+    echo "PackerSync command ran successfully."
+  fi
+
+}
+
 function main() {
 
     install_nvim
@@ -147,6 +171,10 @@ function main() {
     install_vimplug
 
     fix_nvim_conf_chmod
+
+    install_plugins
+
+    update_plugins
 
     # copy_to_local_bin
 
