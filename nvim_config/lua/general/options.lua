@@ -95,5 +95,4 @@ Option.w({
     --     and scroll buffer.
     scrolloff = 0,
     wrap = true,
-    colorcolumn = "80",
 })
