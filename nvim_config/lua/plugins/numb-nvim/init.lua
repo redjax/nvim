@@ -3,4 +3,4 @@ local uname = vim.loop.os_uname()
 -- Set local env var for OS
 local _OS = uname.sysname
 
-require "plugins.nvim-treesitter.settings"
+require "plugins.numb-nvim.settings"
