@@ -1,19 +1,11 @@
-﻿# My Neovim configuration file
+﻿Table of Contents
 
-## Table of Contents
-
-- [My Neovim configuration file](#my-neovim-configuration-file)
-  - [Table of Contents](#table-of-contents)
-  - [Description](#description)
-  - [Setup/Usage](#setupusage)
-  - [Directory Structure](#directory-structure)
-  - [Vim/Nvim Plugins](#vimnvim-plugins)
-    - [In Use](#in-use)
-    - [Will/Might Try](#willmight-try)
-  - [Links \& Notes](#links--notes)
-    - [Notes](#notes)
-      - [Lua notes](#lua-notes)
-    - [Links](#links)
+- [Description](#description)
+- [Setup/Usage](#setupusage)
+- [Directory Structure](#directory-structure)
+- [Links \& Notes](#links--notes)
+  - [Notes](#notes)
+  - [Links](#links)
 
 ## Description
 
@@ -25,158 +17,50 @@ This repository uses a `Github Actions` workflow file (in `.github/workflows/`) 
 
 ## Setup/Usage
 
-- On `Linux` hosts
-	- `nvim` config path: `~/.config/nvim`
+**Note**: `nvim` config path: `~/.config/nvim`
 
-- On `Windows` hosts
-  - `nvim` config path: `~/AppData/Local/nvim`
-	
-- All hosts:
-	- Clone the repository: `git clone git@github.com:redjax/nvim.git`
-	- Run `Plug` install command(s):
-	  - `nvim +PlugInstall +PlugUpdate +qa`
-	- Run with `nvim` to make sure there are no errors.
+- Clone the repo
+  - `$ git clone https://github.com/redjax/nvim`
+  - Or with SSH: `$ git clone github.com:redjax/nvim`
+-  Run setup scripts
+   -  **Linux hosts**
+      -  `$ cd scripts`
+         -  Install nvim: `$ ./get_nvim_appimage.sh`
+         -  Install packer: `$ ./install_nvim_packer.sh`
+         -  Run setup script
+            -  `$ ./update_nvim_conf.sh`
+   -  **Windows hosts**
+      -  `$ cd scripts`
+         -  Install nvim buildtools: `$ .\install_nvim_buildtools.ps1`
+         -  Install `Packer`: `$ .\install_nvim_packer.ps1`
+         -  Run setup script
+            -  `$ .\update_nvim_conf.ps1`
+
+
+**IMPORTANT**: Some of the automated setup may fail. This is normal, and I'm still trying to figure out a way to work around this. The steps below tend to fix plugin installs/configuration issues:
+
+  - Re-run the `Packer` install a couple of times
+    - `$ nvim +PackerSync +qa`
+    - OR
+      - open `nvim` from the CLI, then run `PackerSync` a few times
+    - You may need to run `PackerSync`, exit nvim, re-open nvim, and run it again multiple times before the environment will be fully configured
 
 ## Directory Structure
 
-My `init.vim` sources configuration & plugin installations from the `conf/` directory. The root level of `conf/` should only be environment/common files. This is where my `autocmd` rules file, key mappings, environment configuration, & plugin manager files are.
-
-Configurations for plugins are loaded from the `plugin-conf` directory in a `for` loop inside `init.vim`. When adding new config files, you don't need to add lines to `init.vim`. The order sourcing is configured in `init.vim` is for compatibility, and to ensure things load in the correct way.
-
-The `autoload/` directory is created by `vim-plug` upon installation. You don't need to mess with anything in that directory.
-
-The `colors/` directory stores my themes for Vim/Nvim. I'm still working on figuring out how to get these installed correctly through `vim-plug`.
-
-## Vim/Nvim Plugins
-
-My setup uses multiple plugins. I use [Vim Plug](https://github.com/junegunn/vim-plug) to install plugins.
-
-### In Use
-
-- NERDTree
-	- URL: https://github.com/preservim/nerdtree
-  - Plug Install: `Plug 'preservim/nerdtree'`
-
-- Syntastic
-  - URL: https://github.com/vim-syntastic/syntastic
-  - Plug Install: `Plug 'vim-syntastic/syntastic'`
-
-- vim-surround
-  - URL: https://github.com/tpope/vim-surround
-  - Plug Install: `Plug 'tpope/vim-surround'`
-
-- Vim-Fugitive
-  - URL: https://github.com/tpope/vim-fugitive
-  - Plug Install: `Plug 'tpope/vim-fugitive'`
-
-- Git-Gutter
-  - URL: https://github.com/airblade/vim-gitgutter/
-  - Plug Install: `Plug 'airblade/vim-gitgutter'`
-
-- Airline
-  - URL: https://github.com/vim-airline/vim-airline
-  - Plug Install: `Plug 'vim-airline/vim-airline'`
-
-- Airline-Themes
-  - URL: https://github.com/vim-airline/vim-airline-themes
-  - Plug Install: `Plug 'vim-airline/vim-airline-themes'`
-
-- Virtualenv
-  - URL: https://github.com/jmcantrell/vim-virtualenv
-  - Plug Install: `Plug 'jmcantrell/vim-virtualenv'`
-
-- CtrlSpace
-  - URL: https://github.com/vim-ctrlspace/vim-ctrlspace
-  - Plug Install: `Plug 'vim-ctrlspace/vim-ctrlspace'`
-
-- IndentGuides
-  - URL: https://github.com/thaerkh/vim-indentguides
-  - Plug Install: `Plug 'thaerkh/vim-indentguides'`
-
-- Visual-Multi
-  - URL: https://github.com/mg979/vim-visual-multi
-  - Plug Install: `Plug 'mg979/vim-visual-multi', {'branch': 'master'}`
-
-- Vim-Polyglot
-  - URL: https://github.com/sheerun/vim-polyglot
-  - Plug Install: `Plug 'sheerun/vim-polyglot'`
-
-- Delimitmate
-  - URL: https://github.com/raimondi/delimitmate
-  - Plug Install: `Plug 'raimondi/delimitmate'`
-
-- Comfortable Motion
-  - URL: https://github.com/yuttie/comfortable-motion.vim
-  - Plug Install: `Plug 'yuttie/comfortable-motion.vim'`
-
-- Awesome Colorschemes
-  - URL: https://github.com/rafi/awesome-vim-colorschemes
-  - Plug Install: Plug 'rafi/awesome-vim-colorschemes'
-
-- Colorschemes
-  - URL: https://github.com/flazz/vim-colorschemes'
-  - Plug Install: Plug 'flazz/vim-colorschemes' 
-
-- Vim-Themes
-  - URL: https://github.com/mswift42/vim-themes
-  - Plug Install: Plug 'mswift42/vim-themes'
-
-- Highlighted yank
-  - URL: https://github.com/machakann/vim-highlightedyank
-  - Plug Install: Plug 'machakann/vim-highlightedyank'
-
-### Will/Might Try
-
-- Ale
-  - URL: https://github.com/dense-analysis/ale
-  - Plug Install: `Plug 'dense-analysis/ale'`
-
-- Lightline
-  - URL: https://github.com/itchyny/lightline
-  - Plug Install: `Plug 'itchyny/lightline.vim'`
-
-- Onedark
-  - URL: https://github.com/joshdick/onedark.vim
-  - Plug Install: `Plug 'joshdick/onedark.vim'`
-
-- CtrlP
-  - URL: https://github.com/ctrlpvim/ctrlp.vim
-  - Plug Install: `Plug 'ctrlpvim/ctrlp.vim'`
+- `.github/workflows/`
+  - `.yml` files for Github Actions
+- `nvim_config/`
+  - The core `nvim` configuration files.
+  - This directory is copied/symlinked by the `update_nvim_conf` scripts on Windows/Linux hosts
+- `scripts/`
+  - Scripts to run on Linux/Windows hosts to:
+    - Install dependencies
+    - Configure environment before nvim install
+      - i.e. install build tools, `Packer` (for plugins), etc
 
 ## Links & Notes
 
 ### Notes
-
-- In `.vim` files, a `"` is for comments
-- Check environment (Windows, Mac/Linux) before a vim configuration line
-
-```
-if has("win32") || has("win64")
-    " Windows environment
-
-elseif has("unix")
-    " Mac/Linux environment
-
-end
-```
-
-- Using variables
-  - Get variable man pages with `:help internal-variables`
-  - Set a global variable with `g:<variableName> = <value>`
-    - Global variables are accessible in all `.vim` files
-  - Set a script variable with `s:<variableName> = <value>`
-    - Script variables are accessible only in the file they are set in
-  - Set a function argument with `a:<variableName> = <value>`
-    - Function variables are accessible only within the function
-  - Access a `vim-variable` with `v:<variableName>`
-    - Vim variables are global, andd are pre-defined by Vim/Nvim
-  - Use a variable in a string
-    - i.e. a variable `s:vimfiles` is declared with value `~/AppData/Local/nvim-data`
-    - In the below example, a filepath is built to Vim's `nvim-data` (which is different across platforms), and creates a path to the binary for the current OS.
-
-```
-let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_engine_' . s:os . '_amd64'
-```
 
 - Open nvim & immediately run command
   - `nvim +SomeCommand`
@@ -185,10 +69,6 @@ let g:CtrlSpaceFileEngine = s:vimfiles . '/plugged/vim-ctrlspace' . '/bin/file_e
   - You can also open nvim, run a command, and exit with `+qa`
     - i.e. Run `:PlugInstall` and `:PlugClean`, then exit
     - `nvim +PlugInstall +PlugClean +qa`
-
-#### Lua Notes
-
-I have started rewriting the configuration files for neovim in Lua. Some notes are irrelevant or will not work in Lua. This section is for Lua-specific notes.
 
 - Detect host OS and only run certain commands on specific host
   - First, set local variables at the top of the `.lua` file
@@ -200,7 +80,7 @@ local uname = vim.loop.os_uname()
 local _OS = uname.sysname
 ```
 
-  - Then, you can reference the `_OS` var to do a string comparison
+- Then, you can reference the `_OS` var to do a string comparison
   - For example, to only install a plugin (i.e. `markdown-preview`) only on `Linux` hosts:
 
 ```
@@ -222,8 +102,13 @@ else
 end
 ```
 
-  - In this example, the `markdown-preview.nvim` plugin will only be installed if the `_OS` string matches `"Linux"`
+- In this example, the `markdown-preview.nvim` plugin will only be installed if the `_OS` string matches `"Linux"`
   - The line will be skipped on Mac/Windows environment
 
 ### Links
 
+- [Github: tiagovla .dotfiles](https://github.com/tiagovla/.dotfiles/tree/master/neovim/.config/nvim)
+  - Reference repo used to create directory structure in `nvim_config/`
+  - I also used a lot of tiagovla's `.lua` files as a reference, or just straight up copied them, for plugin/environment config
+- [Github: mthnglac dotfiles](https://github.com/mthnglac/dotfiles/tree/master/nvim)
+  - Another reference repo for nvim configuration
