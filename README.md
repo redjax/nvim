@@ -52,6 +52,25 @@ This repository uses a `Github Actions` workflow file (in `.github/workflows/`) 
 - `nvim_config/`
   - The core `nvim` configuration files.
   - This directory is copied/symlinked by the `update_nvim_conf` scripts on Windows/Linux hosts
+  - `nvim_config/after`
+    - `.lua` files in this directory will be run after other runtime actions
+    - i.e. the `after/ftplugin` configures settings for filetypes (i.e. `.py`, `.lua`) after detecting filetype runtime stage for nvim
+  - `nvim_config/colors`
+    - `.vim` colorschemes
+  - `nvim_config/lua`
+    - nvim's main configuration files
+    - the `init.lua` file at the root of `lua/` imports/"requires" other modules under `lua/`
+    - `nvim_config/lua/general`
+      - `.lua` files for general configuration of nvim
+      - This includes `autocmds`, setting the colorscheme, lua functions for nvim, keybindings, nvim options (like "show linenumbers" and search settings), and global variables
+    - `nvim_config/lua/plugins`
+      - Configurations for installed plugins
+      - The `lua/plugin-installs.lua` file sources configurations for installed plugins from directories in this folder
+    - `nvim_config/lua/utils`
+      - Utility files used throughout nvim
+      - Declares functions (i.e. `Variables`) that can be re-used in other scripts
+      - Most variables/functions declared in `utils/*.lua` files are globally accessible
+  - `nvim_config/plugin`
 - `scripts/`
   - Scripts to run on Linux/Windows hosts to:
     - Install dependencies
