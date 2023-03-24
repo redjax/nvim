@@ -2,7 +2,6 @@
 
 nvim_appimage_install_dir="/appimage/nvim"
 
-
 function setup() {
 
   if [[ ! -d "$nvim_appimage_install_dir" ]]; then
@@ -40,13 +39,13 @@ function remove_existing_squashfs() {
 function remove_existing_nvim_appimage() {
 
   if [[ -f ./nvim.appimage ]]; then
-    
+
     echo ""
     echo "Removing existing nvim.appimage"
     echo ""
 
     rm ./nvim.appimage
-  
+
   fi
 
 }
@@ -123,7 +122,7 @@ if [[ -f nvim.appimage ]]; then
     echo ""
     echo "Creating alias /usr/bin/nvim"
     echo ""
-    
+
     sudo ln -s $nvim_appimage_install_dir/squashfs-root/AppRun /usr/bin/nvim
   else
     echo ""

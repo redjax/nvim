@@ -10,10 +10,10 @@ vim.opt.cursorline = true
 vim.opt.autowrite = true
 
 -- Set indent for Python files
-set.tabstop = 4
-set.shiftwidth = 4
-set.softtabstop = 4
-set.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
 
 -- Python ignore files
 vim.opt.wildignore = {
