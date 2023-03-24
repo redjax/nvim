@@ -103,6 +103,76 @@ packer.startup(function()
 	-- 	},
 	-- })
 
+	-- # Nvim-treesitter & extensions
+	if _OS == "Linux" then
+
+		-- https://github.com/nvim-treesitter/nvim-treesitter
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			run = ":TSUpdate",
+			config = function()
+				require("plugins.nvim-treesitter")
+			end,
+		})
+
+	else
+
+		use {
+		'nvim-treesitter/nvim-treesitter',
+		run = function()
+			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+			ts_update()
+		end,
+			config = function()
+					require("plugins.nvim-treesitter")
+				end,
+		}
+
+	end
+
+	-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+	use({
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- https://github.com/nvim-treesitter/vim-treesitter-refactor
+	use({
+		"nvim-treesitter/nvim-treesitter-refactor",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- https://github.com/nvim-treesitter/playground
+	use({
+		"nvim-treesitter/playground",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- https://github.com/nvim-treesitter/windwp/nvim-ts-autotag
+	use({
+		"windwp/nvim-ts-autotag",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- https://github.com/theHamsta/nvim-treesitter-pairs
+
+	use({
+		"theHamsta/nvim-treesitter-pairs",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	-- # End nvim-treesitter & extensions
+
     -- # Preview code
 	-- https://github.com/rmagatti/goto-preview
 	if _OS == "Linux" then
@@ -152,12 +222,12 @@ packer.startup(function()
 
     -- Peek lines immediately with :<line_number>
 	-- https://github.com/nacro90/numb.nvim
-	-- use({
-	-- 	"nacro90/numb.nvim",
-	-- 	config = function()
-	-- 		require("plugins.numb-nvim")
-	-- 	end,
-	-- })
+	use({
+		"nacro90/numb.nvim",
+		config = function()
+			require("plugins.numb-nvim")
+		end,
+	})
 
     -- # Git plugin
 	-- https://github.com/tpope/vim-fugitive
@@ -187,7 +257,7 @@ packer.startup(function()
 		end,
 	})
 
-    -- # Insert or delete brackets, parens, quotes in pair.
+  -- # Insert or delete brackets, parens, quotes in pair.
 	-- https://github.com/windwp/nvim-autopairs
 	if _OS == "Linux" then
 		use({
@@ -240,67 +310,24 @@ packer.startup(function()
 		},
 	})
 
-	-- # Nvim-treesitter & extensions
-	if _OS == "Linux" then
-
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-			config = function()
-				require("plugins.nvim-treesitter")
-			end,
-		})
-
-		-- https://github.com/nvim-treesitter/nvim-treesitter/nvim-treesitter-textobjects
-		use({
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			requires = {
-				"nvim-treesitter/nvim-treesitter",
-			},
-		})
-
-		-- https://github.com/nvim-treesitter/nvim-treesitter/nvim-treesitter-refactor
-		use({
-			"nvim-treesitter/nvim-treesitter-refactor",
-			requires = {
-				"nvim-treesitter/nvim-treesitter",
-			},
-		})
-
-		-- https://github.com/nvim-treesitter/nvim-treesitter/playground
-		use({
-			"nvim-treesitter/playground",
-			requires = {
-				"nvim-treesitter/nvim-treesitter",
-			},
-		})
-
-		-- https://github.com/nvim-treesitter/windwp/nvim-ts-autotag
-		use({
-			"windwp/nvim-ts-autotag",
-			requires = {
-				"nvim-treesitter/nvim-treesitter",
-			},
-		})
-
-		-- https://github.com/nvim-treesitter/theHamsta/nvim-treesitter-pairs
-	
-		use({
-			"theHamsta/nvim-treesitter-pairs",
-			requires = {
-				"nvim-treesitter/nvim-treesitter",
-			},
-		})
-	end
-
-	-- # End nvim-treesitter & extensions
-
 	-- https://github.com/nvim-lua/plenary.nvim
 	--   Lua utils
 	use({ "nvim-lua/plenary.nvim" })
 
-	-- # Telscope & extensions
+	-- # Telescope & extensions
+	use({
+		"nvim-telescope/telescope.nvim",
+		config = function()
+			require("plugins.telescope")
+		end,
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
+	use ({
+		'nvim-telescope/telescope-fzf-native.nvim',
+		-- run='cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+		run="make"
+	})
 
 	-- https://github.com/nvim-telescope/telescope.nvim
 	if _OS == "Linux" then
@@ -313,14 +340,6 @@ packer.startup(function()
 		})
 
 		-- https://github.com/nvim-telescope/telescope-fzf-native.nvim
-		-- if OS == "Windows_NT" then
-			
-		-- 	use {
-		-- 		'nvim-telescope/telescope-fzf-native.nvim',
-		-- 		run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-		-- 	}
-
-		-- else
 		use({
 			"nvim-telescope/telescope-fzf-native.nvim",
 			run = "make",
@@ -328,7 +347,6 @@ packer.startup(function()
 				"nvim-telescope/telescope.nvim",
 			},
 		})
-		-- end
 
 		-- https://github.com/nvim-telescope/telescope-symbols.nvim
 		use({
