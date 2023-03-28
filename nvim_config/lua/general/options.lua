@@ -37,7 +37,7 @@ Option.g({
     backup = false,
     writebackup = true,
     swapfile = false,
-    undodir = tostring(os.getenv("HOME")) .. "~/.nvim/undodir",
+    undodir = tostring(os.getenv("HOME")) .. "/.nvim/undodir",
     undofile = true,
     -- Write changes to swap after "n" milliseconds
     updatetime = 50,
