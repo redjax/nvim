@@ -1,0 +1,2 @@
+-- This is an empty init file to preserve the directory structure of this repo.
+--   When Packer runs, it will create a packer_compiled.lua file here.
