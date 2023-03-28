@@ -104,31 +104,31 @@ packer.startup(function()
 	-- })
 
 	-- # Nvim-treesitter & extensions
-	if _OS == "Linux" then
+	-- if _OS == "Linux" then
 
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-			config = function()
-				require("plugins.nvim-treesitter")
-			end,
-		})
+	-- 	-- https://github.com/nvim-treesitter/nvim-treesitter
+	-- 	use({
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		run = ":TSUpdate",
+	-- 		config = function()
+	-- 			require("plugins.nvim-treesitter")
+	-- 		end,
+	-- 	})
 
-	else
+	-- else
 
-		use {
+	use ({
 		'nvim-treesitter/nvim-treesitter',
 		run = function()
 			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 			ts_update()
 		end,
-			config = function()
-					require("plugins.nvim-treesitter")
-				end,
-		}
+		config = function()
+			require("plugins.nvim-treesitter")
+		end,
+	})
 
-	end
+	-- end
 
 	-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	use({
@@ -270,7 +270,7 @@ packer.startup(function()
 
     -- # Icons pack
 	-- https://github.com/kyazdani42/nvim-web-devicons
-	use({ "kyazdani42/nvim-web-devicons" })
+	use({ "nvim-tree/nvim-web-devicons" })
 
     -- # Buffer closer
 	-- https://github.com/Asheq/close-buffers.vim
@@ -314,20 +314,22 @@ packer.startup(function()
 	--   Lua utils
 	use({ "nvim-lua/plenary.nvim" })
 
+	if _OS == "Windows_NT" then
 	-- # Telescope & extensions
-	use({
-		"nvim-telescope/telescope.nvim",
-		config = function()
-			require("plugins.telescope")
-		end,
-		requires = { "nvim-lua/plenary.nvim" },
-	})
+		use({
+			"nvim-telescope/telescope.nvim",
+			config = function()
+				require("plugins.telescope")
+			end,
+			requires = { "nvim-lua/plenary.nvim" },
+		})
 
-	use ({
-		'nvim-telescope/telescope-fzf-native.nvim',
-		-- run='cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-		run="make"
-	})
+		use ({
+			'nvim-telescope/telescope-fzf-native.nvim',
+			-- run='cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+			run="make"
+		})
+	end
 
 	-- https://github.com/nvim-telescope/telescope.nvim
 	if _OS == "Linux" then
