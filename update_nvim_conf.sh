@@ -1,14 +1,9 @@
 ##
-# Copies nvim configuration from ./nvim_config to Linux nvim config dir
+# Symlinks nvim configuration from ./nvim_config to Linux nvim config dir
 ##
 
-## The path must be absolute for symlink command to work
-git_path="/home/$USER/git"
-config_src="$git_path/nvim/nvim_config"
-config_dest="/home/$USER/.config"
-# config_src="./nvim_config"
-# home_config_dir="$HOME/.config"
-# config_dest="$home_config_dir/nvim"
+config_src=~/git/nvim/nvim_config/
+config_dest=~/.config/nvim
 
 function install_nvim() {
 
@@ -36,49 +31,15 @@ function install_nvim() {
 
 function symlink_nvim_config() {
 
-    if [[ ! -d "$config_dest" ]]; then
-        echo "$config_dest does not exist. Creating."
-        mkdir -pv $config_dest
-    
-    else
-
-        if [[ -d "$config_dest/nvim" ]]; then
-            if [[ -L "$config_dest/nvim" ]]; then
-                echo "symlink for nvim seems to already exist."
-
-                rm "$config_dest/nvim"
-
-            else
-                
-                if [[ -d "$config_dest/nvim.bak" ]]; then
-                    echo "$config_dest/nvim.bak exists. Removing & recreating"
-                    rm -r "$config_dest/nvim.bak"
-                
-                    echo "Moving existing config dir to $config_dest/nvim.bak"
-                    mv $config_dest/nvim $config_dest/nvim.bak
-                
-                else
-                    echo "Moving existing config dir to $config_dest/nvim.bak"
-                    mv $config_dest/nvim $config_dest/nvim.bak
-                fi
-            fi
-        fi
+  if [[ ! -d "$config_dest" ]]; then
+    if [[ ! -L "$config_dest" ]]; then
+      echo "$config_dest does not exist. Creating symlink from [$config_src] to --> [$config_dest]"
+      
+      ln -s $config_src $config_dest
     fi
-
-    # if [[ ! -L ./nvim/ ]]; then
-    #     echo "Creating link from [$config_src] to [$config_dest/nvim]"
-
-    #     ln -nfs $config_src/ nvim
-    # fi
-
-    if [[ ! -d "$config_dest/nvim" ]]; then
-        if ! command -v rsync &> /dev/null
-        then
-            cp -R ./nvim_config $config_dest/nvim
-        else
-            rsync -avzP ./nvim_config $config_dest/nvim
-        fi
-    fi
+  else
+    echo "Destination '$config_dest' already exists. Skipping."
+  fi
 
 }
 
@@ -181,3 +142,4 @@ function main() {
 }
 
 main
+
