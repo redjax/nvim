@@ -6,6 +6,12 @@
 #   to create the symlink to ~/AppData/local/nvim      #
 ########################################################
 
+$USR = @(cmd.exe /c whoami).split("\")[1] -join "`n"
+$USR_DIR = "C:\Users\$USR"
+
+$SRC = "$USR_DIR\git\nvim\nvim_config"
+$TAR = "$USR_DIR\AppData\Local\nvim"
+
 function InstallNvim() {
     ## Install Neovim package on Windows using winget
 
@@ -39,6 +45,15 @@ function UpdateFromGit() {
     }
 }
 
+function symlink_nvim_config() {
+
+    $LINK_CMD = "mklink /J `"$TAR`" `"$SRC`""
+
+    Write-Host "Creating link to: [$SRC] at target destination: [$TAR]"
+
+    cmd.exe /c $LINK_CMD
+
+}
 
 function Main() {
 
@@ -46,12 +61,18 @@ function Main() {
     InstallNvim
 
     ## If nvim's config path exists, remove all items leaving parent dir
-    If ( Test-Path -Path "~/AppData/Local/nvim" ) {
+    If ( Test-Path -Path "$TAR" ) {
         Write-Host "Removing existing nvim conf directory"
 
-        Del -Recurse "~/AppData/Local/nvim/*"
-    }
+        ## Remove symlink
+        fsutil reparsepoint delete $TAR
 
+        If ( Test-Path -Path "$TAR" ) {
+            ## Removing symlink sometimes leaves a directory behind. Delete that directory
+            Remove-Item -Recurse "$TAR"
+        }
+
+    }
     
     UpdateFromGit
 
@@ -63,10 +84,9 @@ function Main() {
         Write-Host ""
         Write-Host "Changes pulled from git."
         Write-Host ""
-    }
 
-    Write-Host "Copying config to ~/AppData/Local/nvim"
-    Copy-Item -Path "./nvim_config/*" -Destination "~/AppData/Local/nvim" -Recurse
+        symlink_nvim_config
+    }
 
 }
 
