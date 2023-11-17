@@ -240,12 +240,12 @@ packer.startup(function()
 
     -- # Display vertical indent lines
 	-- https://github.com/lukas-reineke/indent-blankline.nvim
-	use({
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("plugins.indent-blankline")
-		end,
-	})
+	-- use({
+	-- 	"lukas-reineke/indent-blankline.nvim",
+	-- 	config = function()
+	-- 		require("plugins.indent-blankline")
+	-- 	end,
+	-- })
 
     -- # Show git sign: inserted, modified, deleted vs..
 	--   also git blamer
